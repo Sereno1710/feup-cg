@@ -1,10 +1,10 @@
 # CG 2023/2024
 
-## Group T0xG0y
+## Group T11G05
 | Name             | Number    | E-Mail             |
 | ---------------- | --------- | ------------------ |
-| John Doe         | 201901010 | ...                |
-| Jane Doe         | 201901011 | ...                |
+| Daniel Gago      | 202108791 | up202108791@up.pt  |
+| José Santos      | 202108729 | up202108729@up.pt  |
 
 ----
 
