@@ -4,9 +4,16 @@
 
 ## TP 1 Notes
 
-(add your main observations/remarks about your experiments here, in a bulleted list, and remove this line. Some examples below)
+- In exercise 1, based on ```MyDiamond.js```, we created the requested objects, ```MyParallelogram.js``` (with 4 triangles, to allow visibility on both sides) and ```MyTriangle.js``` (with 1 triangle). After that, we also added the checkboxes to be able to show/hide the objects.
 
-- In exercise 1 we observed X
-- In exercise 2 we had difficulties in Y
+- In exercise 2, based on ```MyTriangle.js```, we created the requested objects ```MyTriangleSmall.js``` and ```MyTriangleBig.js```. We found no dificulties in this exercise.
 
-![Screenshot 1](screenshots/cg-t0xgxx-tp1-n.png)
+![Figure 1: Small Triangle](screenshots/cg-t11g05-tp1a-1.png)
+
+Figure 1: MyTriangleSmall
+
+
+
+![Figure 2: Big Triangle](screenshots/cg-t11g05-tp1b-1.png)
+
+Figure 2: MyTriangleBig
