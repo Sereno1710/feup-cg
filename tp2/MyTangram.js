@@ -42,7 +42,6 @@ export class MyTangram extends CGFobject {
                     0.0,    0.0,   0.0,    1.0 ];
 
             this.scene.multMatrix(rot);
-
             this.scene.setGreenColour();
 
             this.diamond.display();

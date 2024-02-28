@@ -1,5 +1,5 @@
 import { CGFscene, CGFcamera, CGFaxis } from "../lib/CGF.js";
-import { MyTangram } from "./MyTangram.js";
+import { MyComposition } from "./MyComposition.js";
 /**
  * MyScene
  * @constructor
@@ -25,12 +25,11 @@ export class MyScene extends CGFscene {
 
     //Initialize scene objects
     this.axis = new CGFaxis(this);
-    this.tangram= new MyTangram(this);
-
+    this.compostion = new MyComposition(this);
     //Objects connected to MyInterface
     this.displayAxis = true;
     this.scaleFactor = 1;
-    this.displayTangram= true;
+    this.displayComposition = true;
   }
   initLights() {
     this.lights[0].setPosition(0, 0, 5, 5);
@@ -81,6 +80,10 @@ export class MyScene extends CGFscene {
     this.setAmbient(0.9, 0.4, 0.4, 1.0);
     this.setDiffuse(0.9, 0.4, 0.4, 1.0);
   }
+  setWhiteColour(){
+    this.setAmbient(1.0,1.0,1.0,1.0);
+    this.setDiffuse(1.0,1.0,1.0,1.0);
+  }
   display() {
     // ---- BEGIN Background, camera and axis setup
     // Clear image and depth buffer everytime we update the scene
@@ -120,6 +123,8 @@ export class MyScene extends CGFscene {
     ];
 
     this.multMatrix(sca);
-    if (this.displayTangram) this.tangram.display();
+    this.pushMatrix();
+    this.compostion.display();
+
   }
 }
