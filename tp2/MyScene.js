@@ -1,9 +1,5 @@
 import { CGFscene, CGFcamera, CGFaxis } from "../lib/CGF.js";
-import { MyDiamond } from "./MyDiamond.js";
-import { MyTriangle } from "./MyTriangle.js";
-import { MyParallelogram } from "./MyParallelogram.js";
-import { MyTriangleSmall } from "./MyTriangleSmall.js";
-import { MyTriangleBig } from "./MyTriangleBig.js";
+import { MyTangram } from "./MyTangram.js";
 /**
  * MyScene
  * @constructor
@@ -11,6 +7,7 @@ import { MyTriangleBig } from "./MyTriangleBig.js";
 export class MyScene extends CGFscene {
   constructor() {
     super();
+
   }
   init(application) {
     super.init(application);
@@ -28,25 +25,12 @@ export class MyScene extends CGFscene {
 
     //Initialize scene objects
     this.axis = new CGFaxis(this);
-    this.diamond = new MyDiamond(this);
-    this.triangle = new MyTriangle(this);
-    this.paralellogram = new MyParallelogram(this);
-    this.smallTriangle1 = new MyTriangleSmall(this);
-    this.smallTriangle2 = new MyTriangleSmall(this);
-    this.bigTriangle1 = new MyTriangleBig(this);
-    this.bigTriangle2 = new MyTriangleBig(this);
-    
+    this.tangram= new MyTangram(this);
 
     //Objects connected to MyInterface
     this.displayAxis = true;
     this.scaleFactor = 1;
-    this.displayDiamond = true;
-    this.displayTriangle = true;
-    this.displayParallelogram = true;
-    this.displaySmallTriangle1 = true;
-    this.displaySmallTriangle2 = true;
-    this.displayBigTriangle1 = true;
-    this.displayBigTriangle2 = true;
+    this.displayTangram= true;
   }
   initLights() {
     this.lights[0].setPosition(0, 0, 5, 5);
@@ -136,91 +120,6 @@ export class MyScene extends CGFscene {
     ];
 
     this.multMatrix(sca);
-    
-    // Translation throught the vector (0.8, 2.0, 0.0)
-    var tra = [ 1.0, 0.0, 0.0, 0.0,
-                0.0, 1.0, 0.0, 0.0,
-                0.0, 0.0, 1.0, 0.0,
-                0.85, 2.5, 0.0, 1.0 ];
-
-    this.multMatrix(tra);
-
-    var deg2rad = Math.PI / 180.0;
-    var a_rad = 60.0 * deg2rad;
-    var cos_a = Math.cos(a_rad);
-    var sin_a = Math.sin(a_rad);
-
-    // Rotation 60 degrees around the Z axis
-    var rot = [ cos_a, -sin_a, 0.0,    0.0,
-                sin_a,  cos_a, 0.0,    0.0,
-                0.0,    0.0,   1.0,    0.0,
-                0.0,    0.0,   0.0,    1.0 ];
-    
-    this.multMatrix(rot);
-    
-    this.setGreenColour();
-
-    if (this.displayDiamond) this.diamond.display();
-
-    // Pop the matrix containing the diamond transformations
-    this.popMatrix();
-
-    this.pushMatrix();
-
-    // Draw blue triangle
-    this.rotate(-Math.PI / 2, 0, 0, 1);
-    this.setBlueColour();
-    if (this.displayBigTriangle1) this.bigTriangle1.display();
-
-    this.popMatrix();
-
-    this.pushMatrix();
-
-    // Draw orange triangle
-    this.translate(2, -2, 0);
-    this.rotate(Math.PI / 2, 0, 0, 1);
-    this.setOrangeColour();
-    if (this.displayBigTriangle2) this.bigTriangle2.display();
-
-    this.popMatrix();
-
-    this.pushMatrix();
-
-    // Draw pink triangle
-    this.translate(1.5, -3.5, 0);
-    this.setPinkColour();
-    if (this.displayTriangle) this.triangle.display();
-
-    this.popMatrix();
-
-    this.pushMatrix();
-
-    // Draw yellow paralellogram
-    this.scale(-1, 1, 1)
-    this.translate(0, 2, 0);
-    this.rotate(-(7*Math.PI)/20, 0, 0, 1);
-    this.setYellowColour();
-    if (this.displayParallelogram) this.paralellogram.display();
-
-    this.popMatrix();
-
-    this.pushMatrix();
-
-    // Draw purple triangle
-    this.translate(0.15, 4.15, 0);
-    this.rotate((11*Math.PI)/20, 0, 0, 1);
-    this.setPurpleColour();
-    if (this.displaySmallTriangle1) this.smallTriangle1.display();
-
-    this.popMatrix();
-
-    this.pushMatrix();
-
-    // Draw purple triangle
-    this.translate(-0.65, 2.45, 0);
-    this.rotate((3*Math.PI)/20, 0, 0, 1);
-    this.setRedColour();
-    if (this.displaySmallTriangle2) this.smallTriangle2.display();
-
+    if (this.displayTangram) this.tangram.display();
   }
 }
