@@ -22,6 +22,7 @@ export class MyTangram extends CGFobject {
 
     }
     display(){
+            this.scene.pushMatrix();
          // Translation throught the vector (0.8, 2.0, 0.0)
                 var tra = [ 1.0, 0.0, 0.0, 0.0,
                     0.0, 1.0, 0.0, 0.0,
@@ -105,6 +106,8 @@ export class MyTangram extends CGFobject {
             this.scene.rotate((3*Math.PI)/20, 0, 0, 1);
             this.scene.setRedColour();
             this.smallTriangle2.display();
+            this.scene.popMatrix();
+
             this.scene.popMatrix();
             }
 }    
