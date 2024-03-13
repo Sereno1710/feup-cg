@@ -18,3 +18,8 @@ Figure 2: Tangram with custom colour
 Figure 3: Prism with 6 slices and 20 stacks 
  
 
+- In exercise 3, we found some difficulties in changing the indices from the prism. We found the rest of the task not hard.  
+
+![Figure 4: Cylinder](screenshots/cg-t11g05-tp3-4.png)
+Figure 4: Cylinder with 8 slices and 20 stacks 
+ 
