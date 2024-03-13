@@ -18,20 +18,26 @@ export class MyPrism extends CGFobject {
     this.indices = [];
     this.normals = [];
 
-    let angle = (2 * Math.PI) / this.slices;
+    var angle = (2 * Math.PI) / this.slices;
 
-    for (let i = 0; i < this.slices; i++) {
-      var x1 = Math.cos(i * angle);
-      var y1 = Math.sin(i * angle);
-      var x2 = Math.cos((i + 1) * angle);
-      var y2 = Math.sin((i + 1) * angle);
+    var z = 1 / this.stacks;
 
-      var xN = Math.cos((i + 0.5) * angle);
-      var yN = Math.sin((i + 0.5) * angle);
+    for(var j =0; j < this.stacks; j++){
+      for(var i = 0; i < this.slices; i++) {
+        var x1 = Math.cos(i * angle);
+        var y1 = Math.sin(i * angle);
+        var x2 = Math.cos((i + 1) * angle);
+        var y2 = Math.sin((i + 1) * angle);
 
-      this.vertices.push(x1, y1, 0, x2, y2, 0, x1, y1, 1, x2, y2, 1);
-      this.indices.push(4 * i, 4 * i + 1, 4 * i + 2, 4 * i + 3, 4 * i + 2, 4 * i + 1);
-      this.normals.push(xN, yN, 0, xN, yN, 0, xN, yN, 0, xN, yN, 0);
+        var xN = Math.cos((i + 0.5) * angle);
+        var yN = Math.sin((i + 0.5) * angle);
+
+        var baseIndex = 4 * (i + j * this.slices);
+
+        this.vertices.push(x1, y1, z*j, x2, y2, z*j, x1, y1, z*(j+1), x2, y2, z*(j+1));
+        this.indices.push(baseIndex, baseIndex + 1, baseIndex + 2, baseIndex + 3, baseIndex + 2, baseIndex + 1);
+        this.normals.push(xN, yN, 0, xN, yN, 0, xN, yN, 0, xN, yN, 0);
+      }
     }
 
     this.primitiveType = this.scene.gl.TRIANGLES;

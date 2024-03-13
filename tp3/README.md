@@ -10,4 +10,11 @@
 Figure 1: Wood Unit Cube
  
 ![Figure 2: Tangram](screenshots/cg-t11g05-tp3-2.png)
+Figure 2: Tangram with custom colour
+
+- In exercise 2, we found some difficulties finding the angle for the normals. Also, when we had to add the stacks to the prism, we had some problems finding a way to declare the indices.
+
+![Figure 3: Prism](screenshots/cg-t11g05-tp3-3.png)
+Figure 3: Prism with 6 slices and 20 stacks 
+ 
 
