@@ -1,6 +1,8 @@
 import { CGFscene, CGFcamera, CGFaxis, CGFappearance, CGFtexture } from "../lib/CGF.js";
 import { MyQuad } from "./MyQuad.js";
 import { MyTangram } from "./MyTangram.js";
+import { MyUnitCubeQuad } from "./MyUnitCubeQuad.js";
+
 /**
  * MyScene
  * @constructor
@@ -24,11 +26,6 @@ export class MyScene extends CGFscene {
         this.gl.depthFunc(this.gl.LEQUAL);
         this.enableTextures(true);
 
-        //Initialize scene objects
-        this.axis = new CGFaxis(this);
-        this.quad = new MyQuad(this);
-        this.tangram = new MyTangram(this);
-
         //------ Applied Material
         this.quadMaterial = new CGFappearance(this);
         this.quadMaterial.setAmbient(0.1, 0.1, 0.1, 1);
@@ -43,7 +40,16 @@ export class MyScene extends CGFscene {
         this.texture1 = new CGFtexture(this, 'images/board.jpg');
         this.texture2 = new CGFtexture(this, 'images/floor.png');
         this.texture3 = new CGFtexture(this, 'images/window.jpg');
+        this.textureTop = new CGFtexture(this, 'images/mineTop.png');
+        this.textureBottom = new CGFtexture(this, 'images/mineBottom.png');
+        this.textureSide = new CGFtexture(this, 'images/mineSide.png');
         //-------
+
+        //Initialize scene objects
+        this.axis = new CGFaxis(this);
+        this.quad = new MyQuad(this);
+        this.tangram = new MyTangram(this);
+        this.unitcubequad = new MyUnitCubeQuad(this, this.textureSide, this.textureSide, this.textureTop, this.textureSide, this.textureBottom, this.textureSide);
 
         //-------Objects connected to MyInterface
         this.displayAxis = true;
@@ -74,7 +80,7 @@ export class MyScene extends CGFscene {
     }
 
     setDefaultAppearance() {
-        this.setAmbient(0.2, 0.4, 0.8, 1.0);
+        this.setAmbient(1, 1, 2, 1.0);
         this.setDiffuse(0.2, 0.4, 0.8, 1.0);
         this.setSpecular(0.2, 0.4, 0.8, 1.0);
         this.setShininess(10.0);
@@ -124,7 +130,7 @@ export class MyScene extends CGFscene {
         // add a checkbox in the GUI to alternate in real time
         
         // this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_MAG_FILTER, this.gl.NEAREST);
-        this.tangram.display();
+        this.unitcubequad.display();
         // this.quad.display();
 
         // ---- END Primitive drawing section
