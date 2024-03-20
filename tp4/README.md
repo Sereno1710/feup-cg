@@ -12,4 +12,4 @@ Figure 1: MyTangram
 - In exercise 2 we had some minor difficulty finding out how to bind textures each of the sides. Apart from that, it was very simple
 
 ![Figure 2: Textured cube](screenshots/cg-t11g05-tp4-2.png)
-Figure 1: Textured cube
+Figure 2: Textured cube
