@@ -11,3 +11,9 @@ Figure 1: Blue Yellow Bule
 
 ![Figure 2: My Sepia](screenshots/cg-t11g05-tp5-2.png)
 Figure 2: My Sepia
+
+
+- In exercise 2 we had to create a shader that would apply water texture and water map to a plane. We found some difficulties as we were not able to do the texture mapping for high values of the texture coordinates.
+
+![Figure 3: Water Texture](screenshots/cg-t11g05-tp5-3.png)
+Figure 3: Water Plane
