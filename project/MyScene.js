@@ -99,7 +99,6 @@ export class MyScene extends CGFscene {
 
     this.pushMatrix();
     this.appearanceEarth.apply();
-    this.scale(10, 10, 10);
     this.sphere.display();
     this.popMatrix();
 

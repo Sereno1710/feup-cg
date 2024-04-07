@@ -17,15 +17,19 @@ export class MySphere extends CGFobject {
     this.vertices = [];
     this.indices = [];
     this.normals = [];
+    this.texCoords = [];
 
     var delta_alpha = Math.PI / 2 / this.stacks;
     var delta_beta = (2 * Math.PI) / this.slices;
     var equatorVertices = [];
     var equatorNormals = [];
+    var equatorTexCoords = [];
     var northVertices = [];
     var northNormals = [];
+    var northTexCoords = [];
     var southVertices = [];
     var southNormals = [];
+    var southTexCoords = [];
 
     for (var i = 0; i < this.stacks; i++) {
       for (var j = 0; j < this.slices; j++) {
@@ -36,14 +40,22 @@ export class MySphere extends CGFobject {
         var y1 = Math.sin(alpha);
         var z1 = Math.cos(beta) * Math.cos(alpha);
 
+        var u = j / this.slices;
+        var v = (this.stacks - i) / this.stacks;
+
         if (i == 0) {
           equatorVertices.push(x1, y1, z1);
           equatorNormals.push(x1, y1, z1);
+
+          equatorTexCoords.push(j / this.slices, 0.5);
         } else {
           northVertices.push(x1, y1, z1);
           northNormals.push(x1, y1, z1);
           southVertices.push(x1, -y1, z1);
           southNormals.push(x1, -y1, z1);
+
+          northTexCoords.push(u, v/2);
+          southTexCoords.push(u, 1 - v/2);
         }
       }
     }
@@ -51,14 +63,17 @@ export class MySphere extends CGFobject {
     // Equator
     this.vertices = this.vertices.concat(equatorVertices);
     this.normals = this.normals.concat(equatorNormals);
+    this.texCoords = this.texCoords.concat(equatorTexCoords);
 
     // North Hemisphere
     this.vertices = this.vertices.concat(northVertices);
     this.normals = this.normals.concat(northNormals);
+    this.texCoords = this.texCoords.concat(northTexCoords);
 
     // South Hemisphere
     this.vertices = this.vertices.concat(southVertices);
     this.normals = this.normals.concat(southNormals);
+    this.texCoords = this.texCoords.concat(southTexCoords);
 
     // North Pole
     this.vertices.push(0, 1, 0);
