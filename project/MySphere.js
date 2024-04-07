@@ -43,22 +43,22 @@ export class MySphere extends CGFobject {
         var y1 = Math.sin(alpha);
         var z1 = Math.cos(beta) * Math.cos(alpha);
 
-        var u = j / this.slices;
+        var u = (this.slices - j) / this.slices;
         var v = (this.stacks - i) / this.stacks;
 
         if (i == 0) {
-          // We want the hemispheres to share the equator coordinates to make it smoohter
+          // We want the hemispheres to share the equator coordinates to make it smoother
           // So, on the first iteration, only one vertice is added per loop
           equatorVertices.push(x1, y1, z1);
-          equatorNormals.push(x1, y1, z1);
+          equatorNormals.push(-x1, -y1, -z1);
 
-          equatorTexCoords.push(j / this.slices, 0.5);
+          equatorTexCoords.push(u, 0.5);
         } else {
           // All other iterations we add a vertice to the north hemisphere and the mirrored vertice to the south hemisphere
           northVertices.push(x1, y1, z1);
-          northNormals.push(x1, y1, z1);
+          northNormals.push(-x1, -y1, -z1);
           southVertices.push(x1, -y1, z1);
-          southNormals.push(x1, -y1, z1);
+          southNormals.push(-x1, y1, -z1);
 
           northTexCoords.push(u, v / 2);
           southTexCoords.push(u, 1 - v / 2);
@@ -109,23 +109,23 @@ export class MySphere extends CGFobject {
         }
 
         this.indices.push(
-          northSquareBottomLeft,
           northSquareBottomRight,
+          northSquareBottomLeft,
           northSquareTopRight,
 
-          southSquareTopRight,
           southSquareTopLeft,
+          southSquareTopRight,
           southSquareBottomLeft
         );
         // If it's not the last stack, make it a square
         if (i != this.stacks - 1) {
           this.indices.push(
-            northSquareTopRight,
             northSquareTopLeft,
+            northSquareTopRight,
             northSquareBottomLeft,
 
-            southSquareBottomLeft,
             southSquareBottomRight,
+            southSquareBottomLeft,
             southSquareTopRight
           );
         }
