@@ -21,18 +21,21 @@ export class MySphere extends CGFobject {
 
     var delta_alpha = Math.PI / 2 / this.stacks;
     var delta_beta = (2 * Math.PI) / this.slices;
+
     var equatorVertices = [];
     var equatorNormals = [];
     var equatorTexCoords = [];
+
     var northVertices = [];
     var northNormals = [];
     var northTexCoords = [];
+
     var southVertices = [];
     var southNormals = [];
     var southTexCoords = [];
 
-    for (var i = 0; i < this.stacks; i++) {
-      for (var j = 0; j < this.slices; j++) {
+    for (var i = 0; i <= this.stacks; i++) {
+      for (var j = 0; j <= this.slices; j++) {
         var alpha = i * delta_alpha;
         var beta = j * delta_beta;
 
@@ -44,18 +47,21 @@ export class MySphere extends CGFobject {
         var v = (this.stacks - i) / this.stacks;
 
         if (i == 0) {
+          // We want the hemispheres to share the equator coordinates to make it smoohter
+          // So, on the first iteration, only one vertice is added per loop
           equatorVertices.push(x1, y1, z1);
           equatorNormals.push(x1, y1, z1);
 
           equatorTexCoords.push(j / this.slices, 0.5);
         } else {
+          // All other iterations we add a vertice to the north hemisphere and the mirrored vertice to the south hemisphere
           northVertices.push(x1, y1, z1);
           northNormals.push(x1, y1, z1);
           southVertices.push(x1, -y1, z1);
           southNormals.push(x1, -y1, z1);
 
-          northTexCoords.push(u, v/2);
-          southTexCoords.push(u, 1 - v/2);
+          northTexCoords.push(u, v / 2);
+          southTexCoords.push(u, 1 - v / 2);
         }
       }
     }
@@ -75,87 +81,55 @@ export class MySphere extends CGFobject {
     this.normals = this.normals.concat(southNormals);
     this.texCoords = this.texCoords.concat(southTexCoords);
 
-    // North Pole
-    this.vertices.push(0, 1, 0);
-    this.normals.push(0, 1, 0);
-
-    // South Pole
-    this.vertices.push(0, -1, 0);
-    this.normals.push(0, -1, 0);
-
-    var layerPointCount = this.slices;
-    var hemispherePointCount = (this.stacks - 1) * this.slices;
-
-    // Choosing all indices apart from the triangles on the poles
-    for (var i = 0; i < this.stacks - 1; i++) {
-      var layerBaseIndex = i * this.slices;
+    // If there's n slices, there's n+1 points in a layer in order to close the texture
+    // If we didn't want to add a texture to the sphere, we could just loop back to the first point
+    var layerVertexCount = this.slices + 1; 
+    var hemispherePointCount = this.stacks * (this.slices + 1);
+    for (var i = 0; i < this.stacks; i++) {
+      var layerBaseIndex = i * layerVertexCount;
       for (var j = 0; j < this.slices; j++) {
+        // this.vertices = [Equator Layer, North Layer 1, ..., North Layer n, South Layer 1, ..., South Layer n]
+        // Each layer has layerVertexCount vertices
+        // We calculate the coordinates of each square based on that
         var northSquareBottomLeft = layerBaseIndex + j;
-        var northSquareTopLeft = layerBaseIndex + layerPointCount + j;
-        if (j == this.slices - 1) {
-          // Loop back to first vertex
-          var northSquareBottomRight = layerBaseIndex;
-          var northSquareTopRight = layerBaseIndex + layerPointCount;
-        } else {
-          var northSquareBottomRight = layerBaseIndex + j + 1;
-          var northSquareTopRight = layerBaseIndex + layerPointCount + j + 1;
-        }
+        var northSquareTopLeft = layerBaseIndex + layerVertexCount + j;
+        var northSquareBottomRight = layerBaseIndex + j + 1;
+        var northSquareTopRight = layerBaseIndex + layerVertexCount + j + 1;
 
         var southSquareBottomLeft = northSquareTopLeft + hemispherePointCount;
         var southSquareBottomRight = northSquareTopRight + hemispherePointCount;
         if (i == 0) {
-          // Share the equator with the north hemisphere
+          // Share the equator with the north hemisphere, so no mirroring
           var southSquareTopLeft = northSquareBottomLeft;
           var southSquareTopRight = northSquareBottomRight;
         } else {
           var southSquareTopLeft = northSquareBottomLeft + hemispherePointCount;
-          var southSquareTopRight = northSquareBottomRight + hemispherePointCount;
+          var southSquareTopRight =
+            northSquareBottomRight + hemispherePointCount;
         }
 
         this.indices.push(
-          northSquareTopRight,
-          northSquareTopLeft,
-          northSquareBottomLeft,
-
           northSquareBottomLeft,
           northSquareBottomRight,
           northSquareTopRight,
 
           southSquareTopRight,
           southSquareTopLeft,
-          southSquareBottomLeft,
-
-          southSquareBottomLeft,
-          southSquareBottomRight,
-          southSquareTopRight
+          southSquareBottomLeft
         );
+        // If it's not the last stack, make it a square
+        if (i != this.stacks - 1) {
+          this.indices.push(
+            northSquareTopRight,
+            northSquareTopLeft,
+            northSquareBottomLeft,
+
+            southSquareBottomLeft,
+            southSquareBottomRight,
+            southSquareTopRight
+          );
+        }
       }
-    }
-
-    // Pole triangles
-    var layerBaseIndex = hemispherePointCount;
-    var northPoleIndex = this.vertices.length / 3 - 2;
-    var southPoleIndex = this.vertices.length / 3 - 1;
-    for (var i = 0; i < this.slices; i++) {
-      var northTriangleLeft = layerBaseIndex + i;
-      if (i == this.slices - 1) {
-        var northTriangleRight = layerBaseIndex;
-      } else {
-        var northTriangleRight = layerBaseIndex + i + 1;
-      }
-
-      var southTriangleLeft = northTriangleLeft + hemispherePointCount;
-      var southTriangleRight = northTriangleRight + hemispherePointCount;
-
-      this.indices.push(
-        northTriangleLeft,
-        northTriangleRight,
-        northPoleIndex,
-
-        southTriangleRight,
-        southTriangleLeft,
-        southPoleIndex
-      );
     }
 
     this.primitiveType = this.scene.gl.TRIANGLES;
