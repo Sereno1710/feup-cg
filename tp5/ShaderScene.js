@@ -210,7 +210,9 @@ export class ShaderScene extends CGFscene {
 			this.testShaders[6].setUniformsValues({ timeFactor: t / 100 % 100 });
 			this.testShaders[9].setUniformsValues({ timeFactor: t / 100 % 100 });
 			this.testShaders[10].setUniformsValues({ timeFactor: t / 100 % 100 });
-			this.testShaders[11].setUniformsValues({ timeFactor: t / 100 % 100 });
+			var v = t / 100 % 100;
+			console.log(v);
+			this.testShaders[11].setUniformsValues({ timeFactor: v });
 	}
 
 	// main display function
