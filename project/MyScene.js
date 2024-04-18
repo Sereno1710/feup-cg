@@ -9,6 +9,7 @@ import {
 import { MyPlane } from "./MyPlane.js";
 import { MySphere } from "./MySphere.js";
 import { MyPanorama } from "./MyPanorama.js";
+import { MyFlower } from "./MyFlower.js";
 
 /**
  * MyScene
@@ -40,7 +41,7 @@ export class MyScene extends CGFscene {
     this.plane = new MyPlane(this, 30);
     this.sphere = new MySphere(this, 32,8);
     this.panorama = new MyPanorama(this, this.texturePanorama);
-
+    this.flower = new MyFlower(this, 2,5,1,1,5);
     //Objects connected to MyInterface
     this.displayAxis = true;
     this.scaleFactor = 1;
@@ -89,10 +90,8 @@ export class MyScene extends CGFscene {
     this.loadIdentity();
     // Apply transformations corresponding to the camera position relative to the origin
     this.applyViewMatrix();
-
     // Draw axis
     if (this.displayAxis) this.axis.display();
-
     // ---- BEGIN Primitive drawing section
 
     this.pushMatrix();
@@ -102,9 +101,10 @@ export class MyScene extends CGFscene {
     this.rotate(-Math.PI / 2.0, 1, 0, 0);
     this.plane.display();
     this.popMatrix();
-
     this.panorama.display();
-
+    this.pushMatrix();
+    this.flower.display();
+    this.popMatrix();
     // ---- END Primitive drawing section
   }
 }
