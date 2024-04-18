@@ -1,5 +1,5 @@
 import { CGFobject, CGFappearance } from "../lib/CGF.js";
-import {MyHalfSphere} from "./MyHalfSphere.js";
+import { MyCircle } from "./MyCircle.js";
 /**
  * MyStem
  * @constructor
@@ -10,7 +10,7 @@ import {MyHalfSphere} from "./MyHalfSphere.js";
 export class MyReceptacle extends CGFobject {
   constructor(scene, radius,heigth) {
     super(scene);
-    this.receptacle = new MyHalfSphere(scene, 32, 8);
+    this.receptacle = new MyCircle(scene, 8);
     this.radius = radius;
     this.heigth = heigth;
     this.initMaterials();
@@ -54,10 +54,10 @@ export class MyReceptacle extends CGFobject {
     this.orange.setShininess(10.0);
   }
   display() {
-
+    this.scene.pushMatrix();
     this.orange.apply();
-    this.scene.rotate(-Math.PI/4, 0, 1, 0);
-    this.scene.scale(this.radius, -this.radius, this.radius);
+    this.scene.translate(0, this.heigth, 0);
     this.receptacle.display();
+    this.scene.popMatrix();
   }
 }

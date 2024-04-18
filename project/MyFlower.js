@@ -14,12 +14,16 @@ export class MyFlower extends CGFobject {
     super(scene);
     this.stem = new MyStem(scene, stem_radius, stem_size);
     this.receptacle = new MyReceptacle(scene, receptacle_radius, stem_size);
-    this.petal = new MyPetal(scene, flower_radius, 2*Math.PI/petal_number);
+    this.petal = new MyPetal(scene, flower_radius, Math.PI/4, stem_size);
   }
   display(){
     this.scene.pushMatrix();
     this.stem.display();
+    this.scene.popMatrix();
+    this.scene.pushMatrix();
     this.receptacle.display();
+    this.scene.popMatrix();
+    this.scene.pushMatrix();
     this.petal.display();
     this.scene.popMatrix();
   }

@@ -32,7 +32,7 @@ export class MyStem extends CGFobject {
   }
 
   display() {
-    this.red.apply();
+    this.green.apply();
     this.scene.pushMatrix();
     this.scene.rotate(-Math.PI/2, 1, 0, 0);
     for(var i = 0; i < this.height; i++){
@@ -44,10 +44,11 @@ export class MyStem extends CGFobject {
     }
     this.scene.popMatrix();
     this.scene.pushMatrix();
-    this.scene.translate(0, this.height,0);
+    this.scene.translate(0, this.height+0.8,0);
     this.scene.rotate(Math.PI,1,0,0);
     this.scene.rotate(Math.PI/4 , 1,0, 1);
     this.scene.scale(this.radius*1.4, this.radius*1.4, this.radius*1.4);
     this.stemtop.display();
+    this.scene.popMatrix();
   }
 }

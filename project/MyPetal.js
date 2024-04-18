@@ -8,11 +8,12 @@ import {MyTriangle} from "./MyTriangle.js";
  * @param stacks - Number of stacks
  */
 export class MyPetal extends CGFobject {
-  constructor(scene, radius,angle) {
+  constructor(scene, radius,angle, height) {
     super(scene);
     this.petal = new MyTriangle(scene);
     this.radius = radius;
     this.angle = angle;
+    this.height = height;
     this.initMaterials();
   }
 
@@ -48,12 +49,14 @@ export class MyPetal extends CGFobject {
     this.white.setShininess(10.0);
   }
   display() {
+
     this.scene.pushMatrix();
     this.white.apply();
-    this.scene.scale(this.radius-0.1, this.radius-0.1, this.radius-0.1);
+    this.scene.scale(this.radius, this.radius, this.radius);
+    this.scene.translate(0, this.height-1, 0);
     this.petal.display();
     this.scene.scale(1, -1, 1);
-    this.scene.rotate(this.angle, 1, 0, 0)
+    this.scene.rotate(this.angle, 0, 1, 0);
     this.petal.display();
     this.scene.popMatrix();
   }
