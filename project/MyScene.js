@@ -41,13 +41,12 @@ export class MyScene extends CGFscene {
     this.plane = new MyPlane(this, 30);
     this.sphere = new MySphere(this, 32,8);
     this.panorama = new MyPanorama(this, this.texturePanorama);
-    this.flower = new MyFlower(this, 2,5,1,1,5);
+    this.flower = new MyFlower(this);
     //Objects connected to MyInterface
     this.displayAxis = true;
     this.scaleFactor = 1;
 
     this.enableTextures(true);
-
     this.texture = new CGFtexture(this, "images/terrain.jpg");
     this.appearance = new CGFappearance(this);
     this.appearance.setTexture(this.texture);
@@ -72,7 +71,7 @@ export class MyScene extends CGFscene {
       vec3.fromValues(50, 10, 15),
       vec3.fromValues(0, 0, 0)
     );
-
+    
   }
   setDefaultAppearance() {
     this.setAmbient(0.2, 0.4, 0.8, 1.0);
@@ -80,6 +79,7 @@ export class MyScene extends CGFscene {
     this.setSpecular(0.2, 0.4, 0.8, 1.0);
     this.setShininess(10.0);
   }
+
   display() {
     // ---- BEGIN Background, camera and axis setup
     // Clear image and depth buffer everytime we update the scene

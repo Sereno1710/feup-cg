@@ -13,9 +13,9 @@ export class MyTriangle extends CGFobject {
 	
 	initBuffers() {
 		this.vertices = [
-            -0.25, 0, 0,	//0
-            0.0, 1, 0,	//1
-            0.25, 0, 0,	//2
+            -2, 0, 0,	//0
+            0, 1, 0,	//1
+            2, 0, 0,	//2
         ];
 
         //Counter-clockwise reference of vertices
