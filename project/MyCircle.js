@@ -16,18 +16,27 @@ export class MyCircle extends CGFobject {
     this.vertices = [];
     this.indices = [];
     this.normals = [];
-
+    this.texCoords = []; // Array to hold texture coordinates
     var delta_alpha = Math.PI / 2 / this.stacks;
     var delta_beta = (2 * Math.PI) / this.slices;
     var beta = 0;
-
+    this.texCoords.push(0.5, 0.5);
     for (var i = 0; i <= this.slices; i++) {
         this.vertices.push(Math.cos(beta), Math.sin(beta), 0);
         this.normals.push(0, 0, 1);
         this.indices.push(i, i + 1, this.slices + 1);
         this.indices.push(this.slices+1,i+1,i);
         beta += delta_beta;
+        var x = Math.cos(i * beta);
+        var y = Math.sin(i * beta);
+
+        // Texture coordinates for the base
+        var s = 0.5 + 0.5 * x;
+        var t = 0.5 + 0.5 * y;
+        this.texCoords.push(s, t);
+
         }
+      
     this.vertices.push(0, 0, 0);
     this.normals.push(0, 0, 1);
 
