@@ -11,7 +11,7 @@ export class MyPanorama extends CGFobject {
     this.material.setSpecular(0, 0, 0, 0);
     this.material.setEmission(1, 1, 1, 1);
     this.material.setTexture(this.texture);
-    this.sphere = new MySphere(scene, 32, 8);
+    this.sphere = new MySphere(scene, 32, 8, true);
   }
 
   display() {

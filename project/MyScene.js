@@ -10,7 +10,8 @@ import { MyPlane } from "./MyPlane.js";
 import { MySphere } from "./MySphere.js";
 import { MyPanorama } from "./MyPanorama.js";
 import { MyFlower } from "./MyFlower.js";
-import {MyGarden} from "./MyGarden.js";
+import { MyGarden } from "./MyGarden.js";
+import { MyRock } from "./MyRock.js";
 /**
  * MyScene
  * @constructor
@@ -35,12 +36,13 @@ export class MyScene extends CGFscene {
     this.gl.depthFunc(this.gl.LEQUAL);
 
     //Textures
-    this.texturePanorama = new CGFtexture(this, "images/panorama2.jpg");
+    this.texturePanorama = new CGFtexture(this, "images/panorama4.jpg");
 
     //Initialize scene objects
     this.axis = new CGFaxis(this);
     this.plane = new MyPlane(this, 30);
     this.sphere = new MySphere(this, 32,8);
+    this.rock = new MyRock(this, 16, 8);
     this.panorama = new MyPanorama(this, this.texturePanorama);
     this.flower = new MyFlower(this,0,0,0);
     this.flowers = [];
@@ -112,6 +114,10 @@ export class MyScene extends CGFscene {
     // ---- BEGIN Primitive drawing section
 
     this.panorama.display();
+    this.pushMatrix();
+    this.translate(1, 1, 1);
+    this.rock.display();
+    this.popMatrix()
     this.pushMatrix();
     if(this.displayFlower) this.flower.display();
     this.popMatrix();
