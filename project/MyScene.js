@@ -51,9 +51,9 @@ export class MyScene extends CGFscene {
     for (let i = 0; i < this.rows; i++) {
       for (let j = 0; j < this.cols; j++) {
           let position = {
-              x: 0 + j * 10 - this.cols * 2, 
-              y: 0 + 1, 
-              z: 0 + i * 10 - this.rows * 2
+              x: 0 + j * 10 - this.cols * 2 + Math.random() * 2, 
+              y: 0, 
+              z: 0 + i * 10 - this.rows * 2 + Math.random() * 2
           };
           this.flowers.push(new MyFlower(this, position.x, position.y, position.z));
       }
