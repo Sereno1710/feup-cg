@@ -12,6 +12,7 @@ import { MyPanorama } from "./MyPanorama.js";
 import { MyFlower } from "./MyFlower.js";
 import { MyGarden } from "./MyGarden.js";
 import { MyRock } from "./MyRock.js";
+import { MyRockSet } from "./MyRockSet.js";
 /**
  * MyScene
  * @constructor
@@ -42,29 +43,19 @@ export class MyScene extends CGFscene {
     this.axis = new CGFaxis(this);
     this.plane = new MyPlane(this, 30);
     this.sphere = new MySphere(this, 32,8);
-    this.rock = new MyRock(this, 16, 8);
+    this.rock = new MyRock(this, 0.5,0.5,0.5);
     this.panorama = new MyPanorama(this, this.texturePanorama);
     this.flower = new MyFlower(this,0,0,0);
-    this.flowers = [];
-    this.rows = 5;
-    this.cols = 5;
-    for (let i = 0; i < this.rows; i++) {
-      for (let j = 0; j < this.cols; j++) {
-          let position = {
-              x: 0 + j * 10 - this.cols * 2 + Math.random() * 2, 
-              y: 0, 
-              z: 0 + i * 10 - this.rows * 2 + Math.random() * 2
-          };
-          this.flowers.push(new MyFlower(this, position.x, position.y, position.z));
-      }
-    }
-    this.garden = new MyGarden(this, 0, 0, 0, this.flowers);
+    this.rockSet = new MyRockSet(this);
+    this.garden = new MyGarden(this, 0, 0, 0, 5, 5);
 
     //Objects connected to MyInterface
     this.displayAxis = true;
     this.scaleFactor = 1;
     this.displayFlower = false;
     this.displayGarden = false;
+    this.displayRock = false;
+    this.displayRockSet = false;
     this.enableTextures(true);
     this.texture = new CGFtexture(this, "images/terrain.jpg");
     this.appearance = new CGFappearance(this);
@@ -75,6 +66,11 @@ export class MyScene extends CGFscene {
     this.appearanceEarth = new CGFappearance(this);
     this.appearanceEarth.setTexture(this.textureEarth);
     this.appearanceEarth.setTextureWrap("REPEAT", "REPEAT");
+
+    this.textureRock = new CGFtexture(this, "images/texturerock.jpg");
+    this.appearanceRock = new CGFappearance(this);
+    this.appearanceRock.setTexture(this.textureRock);
+    this.appearanceRock.setTextureWrap("REPEAT", "REPEAT");
 
   }
   initLights() {
@@ -99,6 +95,12 @@ export class MyScene extends CGFscene {
     this.setSpecular(0.2, 0.4, 0.8, 1.0);
     this.setShininess(10.0);
   }
+  setRockAppearance(){
+    this.appearanceRock.apply();
+  }
+  updateGardenSize(cols, rows){
+    this.garden = new MyGarden(this, 0, 0, 0, cols, rows);
+  }
   display() {
     // ---- BEGIN Background, camera and axis setup
     // Clear image and depth buffer everytime we update the scene
@@ -112,12 +114,18 @@ export class MyScene extends CGFscene {
     // Draw axis
     if (this.displayAxis) this.axis.display();
     // ---- BEGIN Primitive drawing section
-
-    this.panorama.display();
     this.pushMatrix();
-    this.translate(1, 1, 1);
-    this.rock.display();
+    this.panorama.display();
+    this.popMatrix();
+    this.pushMatrix();
+    if(this.displayRock){
+      this.setRockAppearance();
+      this.rock.display();
+    }
     this.popMatrix()
+    this.pushMatrix();
+    if(this.displayRockSet) this.rockSet.display();
+    this.popMatrix();
     this.pushMatrix();
     if(this.displayFlower) this.flower.display();
     this.popMatrix();
