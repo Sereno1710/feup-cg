@@ -12,6 +12,13 @@ import { MyPanorama } from "./MyPanorama.js";
 import { MyFlower } from "./MyFlower.js";
 import { MyGarden } from "./MyGarden.js";
 import { MyRock } from "./MyRock.js";
+import { MyPetal } from "./MyPetal.js";
+import { MyLeaf } from "./MyLeaf.js";
+import { MyStem } from "./MyStem.js";
+import { MyReceptacle } from "./MyReceptacle.js";
+import { MyPetals } from "./MyPetals.js";
+import { MyBee } from "./MyBee.js";
+
 /**
  * MyScene
  * @constructor
@@ -41,23 +48,18 @@ export class MyScene extends CGFscene {
     //Initialize scene objects
     this.axis = new CGFaxis(this);
     this.plane = new MyPlane(this, 30);
-    this.sphere = new MySphere(this, 32,8);
+    this.sphere = new MySphere(this, 32, 8);
     this.rock = new MyRock(this, 16, 8);
     this.panorama = new MyPanorama(this, this.texturePanorama);
-    this.flower = new MyFlower(this,0,0,0);
-    this.flowers = [];
-    this.rows = 5;
-    this.cols = 5;
-    for (let i = 0; i < this.rows; i++) {
-      for (let j = 0; j < this.cols; j++) {
-          let position = {
-              x: 0 + j * 10 - this.cols * 2 + Math.random() * 2, 
-              y: 0, 
-              z: 0 + i * 10 - this.rows * 2 + Math.random() * 2
-          };
-          this.flowers.push(new MyFlower(this, position.x, position.y, position.z));
-      }
-    }
+    this.flower = new MyFlower(this, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+    this.petal = new MyPetal(this, Math.PI / 12, Math.PI / 3);
+    this.stem = new MyStem(this, 0.1, 1, 0, 0);
+    this.leaf = new MyLeaf(this, 0.1, 0.5, 0, 0);
+    this.receptacle = new MyReceptacle(this, 0.5, 1, 0.1, Math.PI / 4, 0);
+    this.petals = new MyPetals(this, 0.5, Math.PI / 4, 0);
+
+    this.bee = new MyBee(this);
+
     this.garden = new MyGarden(this, 0, 0, 0, this.flowers);
 
     //Objects connected to MyInterface
@@ -75,7 +77,6 @@ export class MyScene extends CGFscene {
     this.appearanceEarth = new CGFappearance(this);
     this.appearanceEarth.setTexture(this.textureEarth);
     this.appearanceEarth.setTextureWrap("REPEAT", "REPEAT");
-
   }
   initLights() {
     this.lights[0].setPosition(15, 0, 5, 1);
@@ -91,7 +92,6 @@ export class MyScene extends CGFscene {
       vec3.fromValues(50, 10, 15),
       vec3.fromValues(0, 0, 0)
     );
-    
   }
   setDefaultAppearance() {
     this.setAmbient(0.2, 0.4, 0.8, 1.0);
@@ -115,14 +115,10 @@ export class MyScene extends CGFscene {
 
     this.panorama.display();
     this.pushMatrix();
-    this.translate(1, 1, 1);
-    this.rock.display();
-    this.popMatrix()
-    this.pushMatrix();
-    if(this.displayFlower) this.flower.display();
+    this.bee.display();
     this.popMatrix();
     this.pushMatrix();
-    if(this.displayGarden) this.garden.display();
+    if (this.displayGarden) this.garden.display();
     this.popMatrix();
     // ---- END Primitive drawing section
   }

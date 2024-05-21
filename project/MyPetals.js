@@ -8,7 +8,7 @@ import {MyPetal} from "./MyPetal.js";
  * @param stacks - Number of stacks
  */
 export class MyPetals extends CGFobject {
-  constructor(scene, petal_size,angle, height, petal_number, receptacle_radius, random) {
+  constructor(scene, petal_number, petal_size,angle, height, receptacle_radius, random) {
     super(scene);
     this.petal = new MyPetal(scene);
     this.petal_size = petal_size;
