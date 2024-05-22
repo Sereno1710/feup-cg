@@ -8,16 +8,18 @@ import { MyRockSphere } from "./MyRockSphere.js";
  * @param stacks - Number of stacks
  */
 export class MyRock extends CGFobject {
-  constructor(scene, x, y, z) {
+  constructor(scene) {
     super(scene);
     this.rock = new MyRockSphere(this.scene, 16, 8);
-    this.coordinates = {x: x, y: y, z: z};
     this.scale = Math.random() * 0.5 + 0.1;
+    this.orientation = Math.random() * 2 * Math.PI;
+    this.position = [0,0,0];
+    this.height = 1*this.scale;
   }
   display() { 
     this.scene.pushMatrix();
-    this.scene.translate(this.coordinates.x, this.coordinates.y, this.coordinates.z);
     this.scene.scale(1, this.scale, 1);
+    this.scene.rotate(this.orientation, 1, 0, 1);
     this.scene.setRockAppearance();
     this.rock.display();
     this.scene.popMatrix();

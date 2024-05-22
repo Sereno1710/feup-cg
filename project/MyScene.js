@@ -69,6 +69,8 @@ export class MyScene extends CGFscene {
     this.bee = new MyBee(this);
     this.rock = new MyRock(this, 0.5, 0.5, 0.5);
     this.rockSet = new MyRockSet(this);
+    this.setUpdatePeriod(1000/60);
+
     //Objects connected to MyInterface
     this.displayAxis = true;
     this.scaleFactor = 1;
@@ -76,6 +78,10 @@ export class MyScene extends CGFscene {
     this.displayGarden = false;
     this.displayRock = false;
     this.displayRockSet = false;
+    this.displayBee = false;
+    this.BeeScaleFactor = 0.5;
+    this.speedFactor = 1;
+
     this.enableTextures(true);
     this.texture = new CGFtexture(this, "images/terrain.jpg");
     this.appearance = new CGFappearance(this);
@@ -87,7 +93,7 @@ export class MyScene extends CGFscene {
     this.appearanceEarth.setTexture(this.textureEarth);
     this.appearanceEarth.setTextureWrap("REPEAT", "REPEAT");
 
-    this.textureRock = new CGFtexture(this, "images/texturerock.jpg");
+    this.textureRock = new CGFtexture(this, "images/texturerock.png");
     this.appearanceRock = new CGFappearance(this);
     this.appearanceRock.setTexture(this.textureRock);
     this.appearanceRock.setTextureWrap("REPEAT", "REPEAT");
@@ -119,6 +125,41 @@ export class MyScene extends CGFscene {
   updateGardenSize(cols, rows) {
     this.garden = new MyGarden(this, 0, 0, 0, cols, rows);
   }
+
+  update(t){
+    this.checkKeys();
+    this.bee.update(t, this.speedFactor, this.BeeScaleFactor);
+  }
+
+  checkKeys() {
+
+    var text="Keys pressed: ";
+    var keysPressed=false;
+
+    if (this.gui.isKeyPressed("KeyW")) {
+        text+=" W ";
+        keysPressed=true;
+    }
+
+    if (this.gui.isKeyPressed("KeyS")){
+      text+=" S ";
+      keysPressed=true;
+    }
+
+    if (this.gui.isKeyPressed("KeyA")){
+      text+=" A ";
+      keysPressed=true;
+    }
+
+    if (this.gui.isKeyPressed("KeyD")){
+      text+=" D ";
+      keysPressed=true;
+    }
+
+    if (keysPressed)
+      console.log(text);
+}
+
   display() {
     // ---- BEGIN Background, camera and axis setup
     // Clear image and depth buffer everytime we update the scene
@@ -149,6 +190,9 @@ export class MyScene extends CGFscene {
     this.popMatrix();
     this.pushMatrix();
     if (this.displayGarden) this.garden.display();
+    this.popMatrix();
+    this.pushMatrix();
+    if(this.displayBee) this.bee.display();
     this.popMatrix();
     // ---- END Primitive drawing section
   }
