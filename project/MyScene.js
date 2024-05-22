@@ -73,7 +73,7 @@ export class MyScene extends CGFscene {
     this.displayBee = false;
     this.displayGrass = false;
     this.BeeScaleFactor = 1;
-    this.speedFactor = 1;
+    this.speedFactor = 0.5;
 
     this.enableTextures(true);
     this.texture = new CGFtexture(this, "images/terrain.jpg");
@@ -228,12 +228,12 @@ export class MyScene extends CGFscene {
     this.popMatrix();
 
     this.pushMatrix();
-    this.translate(0, -90, 0);
+    this.translate(10, -90, -10);
     if(this.displayBee) this.bee.display();
     this.popMatrix();
 
     this.pushMatrix();
-    this.translate(0, -100, 0);
+    this.translate(10, -100, -20);
     this.setGrassAppearance();
 
     this.setActiveShader(this.grassShader);
