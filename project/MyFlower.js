@@ -24,9 +24,9 @@ export class MyFlower extends CGFobject {
     this.stemAngle =
       Math.random() * (Math.PI / 24 - Math.PI / 48) + Math.PI / 48;
     this.coordinates = {
-      x: Math.random(),
+      x: Math.random()*5 + 5,
       y: 0,
-      z: Math.random(),
+      z: Math.random()*5 + 5,
     };
 
     this.initMaterials();
@@ -34,8 +34,12 @@ export class MyFlower extends CGFobject {
       this.petalMaterial1,
       this.petalMaterial2,
       this.petalMaterial3,
+      this.petalMaterial4,
+      this.petalMaterial5,
     ];
-    this.petalMaterial = this.petalMaterials[Math.floor(Math.random() * 3)];
+    this.petalMaterial = this.petalMaterials[Math.floor(Math.random() * 5)];
+    this.receptacleMaterials = [this.receptacleMaterial1, this.receptacleMaterial2];
+    this.receptacleMaterial = this.receptacleMaterials[Math.floor(Math.random()*2)];
 
     this.stem = new MyStem(
       scene,
@@ -87,14 +91,44 @@ export class MyFlower extends CGFobject {
     );
     this.petalMaterial3.setTextureWrap("REPEAT", "REPEAT");
 
-    this.receptacleMaterial = new CGFappearance(this.scene);
-    this.receptacleMaterial.setAmbient(0.8, 0.8, 0.8, 0.0);
-    this.receptacleMaterial.setDiffuse(0.95, 0.95, 0.95, 0.0);
-    this.receptacleMaterial.setSpecular(0.5, 0.5, 0.5, 0.0);
-    this.receptacleMaterial.setTexture(
+    this.petalMaterial4 = new CGFappearance(this.scene);
+    this.petalMaterial4.setAmbient(0.8, 0.8, 0.8, 0.0);
+    this.petalMaterial4.setDiffuse(0.95, 0.95, 0.95, 0.0);
+    this.petalMaterial4.setSpecular(0.5, 0.5, 0.5, 0.0);
+    this.petalMaterial4.setTexture(
+      new CGFtexture(this.scene, "images/petaltexture4.png")
+    );
+    this.petalMaterial4.setTextureWrap("REPEAT", "REPEAT");
+
+    this.petalMaterial5 = new CGFappearance(this.scene);
+    this.petalMaterial5.setAmbient(0.8, 0.8, 0.8, 0.0);
+    this.petalMaterial5.setDiffuse(0.95, 0.95, 0.95, 0.0);
+    this.petalMaterial5.setSpecular(0.5, 0.5, 0.5, 0.0);
+    this.petalMaterial5.setTexture(
+      new CGFtexture(this.scene, "images/petaltexture5.png")
+    );
+    this.petalMaterial5.setTextureWrap("REPEAT", "REPEAT");
+    
+    this.receptacleMaterial1 = new CGFappearance(this.scene);
+    this.receptacleMaterial1.setAmbient(0.8, 0.8, 0.8, 0.0);
+    this.receptacleMaterial1.setDiffuse(0.95, 0.95, 0.95, 0.0);
+    this.receptacleMaterial1.setSpecular(0.5, 0.5, 0.5, 0.0);
+    this.receptacleMaterial1.setTexture(
       new CGFtexture(this.scene, "images/receptacletexture.jpg")
     );
-    this.receptacleMaterial.setTextureWrap(
+    this.receptacleMaterial1.setTextureWrap(
+      "MIRRORED_REPEAT",
+      "MIRRORED_REPEAT"
+    );
+
+    this.receptacleMaterial2 = new CGFappearance(this.scene);
+    this.receptacleMaterial2.setAmbient(0.8, 0.8, 0.8, 0.0);  
+    this.receptacleMaterial2.setDiffuse(0.95, 0.95, 0.95, 0.0);
+    this.receptacleMaterial2.setSpecular(0.5, 0.5, 0.5, 0.0);
+    this.receptacleMaterial2.setTexture(
+      new CGFtexture(this.scene, "images/receptacletexture2.jpg")
+    );
+    this.receptacleMaterial2.setTextureWrap(
       "MIRRORED_REPEAT",
       "MIRRORED_REPEAT"
     );
