@@ -23,12 +23,17 @@ export class MyInterface extends CGFinterface {
         this.gui.add(this.scene, 'scaleFactor', 0.1, 5).name('Scale Factor');
         //Checkbox element in GUI
         this.gui.add(this.scene, 'displayFlower').name('Display Flower');
-        this.gui.add(this.scene, 'displayGarden').name('Display Garden');
+        var garden = this.gui.addFolder('Garden');
+        garden.add(this.scene, 'displayGarden').name('Display Garden');
+        garden.add(this.scene, 'rows', 1, 5).name('Rows').step(1).onChange(this.scene.updateGarden.bind(this.scene));     
+        garden.add(this.scene, 'cols', 1, 5).name('Columns').step(1).onChange(this.scene.updateGarden.bind(this.scene));
+
         this.gui.add(this.scene, 'displayRock').name('Display Rock');
         this.gui.add(this.scene, 'displayRockSet').name('Display Rock Set');
-        this.gui.add(this.scene, 'displayBee').name('Display Bee');
-        this.gui.add(this.scene, 'BeeScaleFactor', 0.5, 3).name('Bee Scale Factor');
-        this.gui.add(this.scene, 'speedFactor', 0.1, 3).name('Bee Speed Factor');
+        var bee = this.gui.addFolder('Bee');
+        bee.add(this.scene, 'displayBee').name('Display Bee');
+        bee.add(this.scene, 'BeeScaleFactor', 0.5, 3).name('Bee Scale Factor');
+        bee.add(this.scene, 'speedFactor', 0.1, 3).name('Bee Speed Factor');
         this.initKeys();
         return true;
     }
