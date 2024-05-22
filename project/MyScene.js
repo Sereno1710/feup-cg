@@ -58,12 +58,8 @@ export class MyScene extends CGFscene {
     this.garden = new MyGarden(this, 0, 0, 0, this.rows, this.cols);
     this.bee = new MyBee(this, 0, 3 ,0);
     this.rock = new MyRock(this, 0.5, 0.5, 0.5);
-<<<<<<< HEAD
     this.rockSet = new MyRockSet(this, new MyHive(this));
-=======
-    this.rockSet = new MyRockSet(this);
     this.grass = new MyGrass(this, 2500);
->>>>>>> origin/master
     this.setUpdatePeriod(1000/60);
 
     //Objects connected to MyInterface
@@ -74,12 +70,8 @@ export class MyScene extends CGFscene {
     this.displayRock = false;
     this.displayRockSet = false;
     this.displayBee = false;
-<<<<<<< HEAD
-    this.BeeScaleFactor = 1;
-=======
     this.displayGrass = false;
-    this.BeeScaleFactor = 0.5;
->>>>>>> origin/master
+    this.BeeScaleFactor = 1;
     this.speedFactor = 1;
 
     this.enableTextures(true);
