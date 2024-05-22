@@ -4,6 +4,7 @@ import {
   CGFaxis,
   CGFappearance,
   CGFtexture,
+  CGFshader,
 } from "../lib/CGF.js";
 import { MyPlane } from "./MyPlane.js";
 import { MySphere } from "./MySphere.js";
@@ -100,6 +101,18 @@ export class MyScene extends CGFscene {
     this.appearanceRock = new CGFappearance(this);
     this.appearanceRock.setTexture(this.textureRock);
     this.appearanceRock.setTextureWrap("REPEAT", "REPEAT");
+
+    this.textureGrass = new CGFtexture(this, "images/texturegrass.png");
+    this.grassAppearance = new CGFappearance(this);
+    this.grassAppearance.setTexture(this.textureGrass);
+    this.grassAppearance.setTextureWrap('REPEAT', 'REPEAT');
+
+    this.grassShader = new CGFshader(this.gl, "./shader/grass.vert", "./shader/grass.frag");
+    this.grassShader.setUniformsValues({ uSampler2: 1 });
+    this.grassShader.setUniformsValues({ uSampler: 0 });
+    this.grassShader.setUniformsValues({ timeFactor: 0 });
+    this.grassShader.setUniformsValues({ angle: 0 });
+    
   }
   initLights() {
     this.lights[0].setPosition(15, 0, 5, 1);
@@ -129,6 +142,12 @@ export class MyScene extends CGFscene {
   setRockAppearance() {
     this.appearanceRock.apply();
   }
+
+  setGrassAppearance() {  
+    this.grassAppearance.apply();
+  }
+
+
   updateGarden() {
     this.garden.updateGarden(this.rows, this.cols);
   }
@@ -136,6 +155,8 @@ export class MyScene extends CGFscene {
   update(t){
     this.checkKeys();
     this.bee.update(t, this.speedFactor, this.BeeScaleFactor);
+    this.grassShader.setUniformsValues({ timeFactor: t / 100 % 1000 });
+    this.grassShader.setUniformsValues({ angle: Math.sin(t / 100)});
   }
 
   checkKeys() {
@@ -202,7 +223,12 @@ export class MyScene extends CGFscene {
     if(this.displayBee) this.bee.display();
     this.popMatrix();
     this.pushMatrix();
+
+    this.setGrassAppearance();
+
+    this.setActiveShader(this.grassShader);
     if(this.displayGrass) this.grass.display();
+    this.setActiveShader(this.defaultShader);
     this.popMatrix();
     // ---- END Primitive drawing section
   }

@@ -16,13 +16,7 @@ export class MyGrass extends CGFobject{
     }
 
     initAppearance() {
-        this.grassAppearance = new CGFappearance(this.scene);
-        this.grassAppearance.setAmbient(1, 1, 1, 1.0);
-        this.grassAppearance.setDiffuse(0.7, 0.7, 0.7, 1);
-        this.grassAppearance.setSpecular(0.0, 0.0, 0.0, 1);
-        this.grassAppearance.setShininess(10);
-        this.grassAppearance.loadTexture('images/texturegrass.png');
-        this.grassAppearance.setTextureWrap('REPEAT', 'REPEAT');
+
     }
     generateGrass() {
         for (let i = 0; i < this.numBlades; i++) {
@@ -34,16 +28,14 @@ export class MyGrass extends CGFobject{
     }
 
     display() {
-        this.scene.pushMatrix();
         for (let i = 0; i < this.numBlades; i++) {
             this.scene.pushMatrix();
             this.scene.translate(this.blades[i].x, 0, this.blades[i].z);
-            this.scene.scale(0.1,0.5,0.1);
+            this.scene.scale(0.3,0.8,0.3);
             this.scene.rotate(this.blades[i].rotation, 0, 1, 0);
-            this.grassAppearance.apply();
+            this.scene.setGrassAppearance();
             this.blades[i].blade.display();
             this.scene.popMatrix();
         }
-        this.scene.popMatrix();
     }
 }
