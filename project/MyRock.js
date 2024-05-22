@@ -9,7 +9,7 @@ export class MyRock extends CGFobject {
   constructor(scene) {
     super(scene);
     this.rock = new MyRockSphere(this.scene, 16, 8);
-    this.scale = Math.random() * 0.5 + 0.1;
+    this.scale = Math.random() * 0.3 + 0.4;
     this.orientation = Math.random() * 2 * Math.PI;
     this.position = [0,0,0];
     this.height = 1*this.scale;

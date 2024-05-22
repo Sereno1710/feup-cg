@@ -11,12 +11,12 @@ export class MyFlower extends CGFobject {
   constructor(scene) {
     super(scene);
 
-    this.exteriorRadius = Math.random() * (7 - 3) + 3;
-    this.petalSize = Math.random() * (3 - 2) + 1;
+    this.exteriorRadius = Math.random() * (3.5 - 1.5) + 1.5;
+    this.petalSize = Math.random() * (2 - 1) + 1;
     this.petalNumber = Math.floor(Math.random() * (16 - 8) + 8);
     this.petalAngle =
-      Math.random() * (Math.PI / 3 - Math.PI / 6) + Math.PI / 6;
-    this.heartRadius =  this.exteriorRadius - this.petalSize;
+      Math.random() * (Math.PI / 6 - Math.PI / 12) + Math.PI / 12;
+    this.heartRadius = this.exteriorRadius > this.petalSize + 1 ? (this.exteriorRadius - this.petalSize) + 0.5 : 1.5;
     this.stemRadius = Math.random() * (0.8 - 0.3) + 0.3;
     this.stemSize =  Math.floor(Math.random() * (6 - 4) + 4);
     this.stemAngle =
