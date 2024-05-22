@@ -3,13 +3,13 @@ import { CGFobject } from "../lib/CGF.js";
  * MyCylinder
  * @constructor
  * @param scene - Reference to MyScene object
- * @param slices - Number of slices
- * @param stacks - Number of stacks
+ * @param slices - Number of triangles to form the circle base
+ * @param stacks - Number of stacks of the cylinder
  */
 export class MyCylinder extends CGFobject {
   constructor(scene, slices, stacks) {
     super(scene);
-    
+
     this.slices = slices;
     this.stacks = stacks;
     

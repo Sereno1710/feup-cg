@@ -4,15 +4,13 @@ import { MyCylinder } from "./MyCylinder.js";
  * MyBeeLeg
  * @constructor
  * @param scene - Reference to MyScene object
- * @param slices - Number of slices
- * @param stacks - Number of stacks
  */
 export class MyBeeLeg extends CGFobject {
   constructor(scene) {
     super(scene);
 
     this.initMaterials();
-    
+
     this.segment = new MyCylinder(scene, 16, 8);
   }
 

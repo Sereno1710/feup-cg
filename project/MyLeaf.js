@@ -5,8 +5,7 @@ import { MyCylinder } from "./MyCylinder.js";
  * MyStem
  * @constructor
  * @param scene - Reference to MyScene object
- * @param slices - Number of slices
- * @param stacks - Number of stacks
+  * @param radius - Radius of the leaf stem
  */
 export class MyLeaf extends CGFobject {
   constructor(scene, radius) {

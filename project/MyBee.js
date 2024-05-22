@@ -7,9 +7,10 @@ import { MyBeeLeg } from "./MyBeeLeg.js";
 /**
  * MyBee
  * @constructor
- * @param scene - Reference to MyScene object
- * @param slices - Number of slices
- * @param stacks - Number of stacks
+  * @param scene - Reference to MyScene object
+  * @param x - x coordinate of the bee
+  * @param y - y coordinate of the bee
+  * @param z - z coordinate of the bee
  */
 export class MyBee extends CGFobject {
   constructor(scene, x, y, z) {

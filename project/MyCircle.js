@@ -3,8 +3,7 @@ import { CGFobject } from "../lib/CGF.js";
  * MyCircle
  * @constructor
  * @param scene - Reference to MyScene object
- * @param slices - Number of slices
- * @param stacks - Number of stacks
+ * @param slices - Number of triangles composing the circle
  */
 export class MyCircle extends CGFobject {
   constructor(scene, slices) {

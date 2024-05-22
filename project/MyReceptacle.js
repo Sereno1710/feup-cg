@@ -5,14 +5,14 @@ import { MyCone } from "./MyCone.js";
  * MyStem
  * @constructor
  * @param scene - Reference to MyScene object
- * @param slices - Number of slices
- * @param stacks - Number of stacks
+ * @param radius - Radius of the receptacle
+ * @param petal_number - Number of petals
  */
 export class MyReceptacle extends CGFobject {
   constructor(scene, radius, petal_number) {
     super(scene);
     this.circle = new MyCircle(scene, petal_number);
-    this.cone = new MyCone(scene, petal_number, 4);
+    this.cone = new MyCone(scene, petal_number);
     this.radius = radius;
   }
 

@@ -4,8 +4,6 @@ import { MyRockSphere } from "./MyRockSphere.js";
  * MyRock
  * @constructor
  * @param scene - Reference to MyScene object
- * @param slices - Number of slices
- * @param stacks - Number of stacks
  */
 export class MyRock extends CGFobject {
   constructor(scene) {

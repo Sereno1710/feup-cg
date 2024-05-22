@@ -1,14 +1,13 @@
 import { CGFobject, CGFappearance, CGFtexture } from "../lib/CGF.js";
 import { MyCylinder } from "./MyCylinder.js";
 import { MyLeaf } from "./MyLeaf.js";
-import { MyCone } from "./MyCone.js";
-import { MyCircle } from "./MyCircle.js";
 /**
  * MyStem
  * @constructor
  * @param scene - Reference to MyScene object
- * @param slices - Number of slices
- * @param stacks - Number of stacks
+ * @param radius - Radius of the stem
+ * @param height - Height of the stem (number of segments)
+ * @param angle - Angle of each stem segment
  */
 export class MyStem extends CGFobject {
   constructor(scene, radius, height, angle) {

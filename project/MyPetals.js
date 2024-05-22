@@ -4,8 +4,12 @@ import {MyPetal} from "./MyPetal.js";
  * MyStem
  * @constructor
  * @param scene - Reference to MyScene object
- * @param slices - Number of slices
- * @param stacks - Number of stacks
+ * @param radius - Radius of the petals
+ * @param petalNumber - Number of petals
+ * @param petalSize - Size of the petals
+ * @param minAngle - Minimum angle when the petals touch the heart
+ * @param maxAngle - Maximum angle when the petals touch the heart
+ * @param petalAngle - Angle of the petals
  */
 export class MyPetals extends CGFobject {
   constructor(scene, radius, petalNumber, petalSize, minAngle, maxAngle, petalAngle) {

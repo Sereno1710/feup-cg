@@ -4,15 +4,13 @@ import { MyCircle } from "./MyCircle.js";
  * MyBeeWing
  * @constructor
  * @param scene - Reference to MyScene object
- * @param slices - Number of slices
- * @param stacks - Number of stacks
  */
 export class MyBeeWing extends CGFobject {
   constructor(scene) {
     super(scene);
 
     this.initMaterials();
-    
+
     this.wing = new MyCircle(scene, 32);
   }
 

@@ -3,7 +3,6 @@ import {
   CGFcamera,
   CGFaxis,
   CGFappearance,
-  CGFshader,
   CGFtexture,
 } from "../lib/CGF.js";
 import { MyPlane } from "./MyPlane.js";
@@ -12,7 +11,6 @@ import { MyPanorama } from "./MyPanorama.js";
 import { MyFlower } from "./MyFlower.js";
 import { MyGarden } from "./MyGarden.js";
 import { MyRock } from "./MyRock.js";
-import { MyPetal } from "./MyPetal.js";
 import { MyLeaf } from "./MyLeaf.js";
 import { MyStem } from "./MyStem.js";
 import { MyReceptacle } from "./MyReceptacle.js";

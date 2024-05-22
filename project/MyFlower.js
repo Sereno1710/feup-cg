@@ -6,8 +6,6 @@ import { MyReceptacle } from "./MyReceptacle.js";
  * MyStem
  * @constructor
  * @param scene - Reference to MyScene object
- * @param slices - Number of slices
- * @param stacks - Number of stacks
  */
 export class MyFlower extends CGFobject {
   constructor(scene) {

@@ -1,10 +1,16 @@
 import { CGFobject, CGFappearance, CGFtexture } from "../lib/CGF.js";
 import { MySphere } from "./MySphere.js";
 
+/**
+ * MyPanorama
+ * @constructor
+ * @param scene - Reference to MyScene object
+ * @param texture - Texture of the panorama
+ */
 export class MyPanorama extends CGFobject {
   constructor(scene, texture) {
     super(scene);
-    
+
     this.texture = texture;
     this.material = new CGFappearance(scene);
     this.material.setAmbient(0, 0, 0, 0);
