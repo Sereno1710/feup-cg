@@ -12,17 +12,13 @@ import { MyPanorama } from "./MyPanorama.js";
 import { MyFlower } from "./MyFlower.js";
 import { MyGarden } from "./MyGarden.js";
 import { MyRock } from "./MyRock.js";
-<<<<<<< HEAD
 import { MyPetal } from "./MyPetal.js";
 import { MyLeaf } from "./MyLeaf.js";
 import { MyStem } from "./MyStem.js";
 import { MyReceptacle } from "./MyReceptacle.js";
 import { MyPetals } from "./MyPetals.js";
 import { MyBee } from "./MyBee.js";
-
-=======
 import { MyRockSet } from "./MyRockSet.js";
->>>>>>> origin/master
 /**
  * MyScene
  * @constructor
@@ -62,12 +58,14 @@ export class MyScene extends CGFscene {
     this.receptacle = new MyReceptacle(this, 0.5, 1, 0.1, Math.PI / 4, 0);
     this.petals = new MyPetals(this, 0.5, Math.PI / 4, 0);
 
-    this.bee = new MyBee(this);
+    this.bee = new MyBee(this,0,3,0);
 
     this.garden = new MyGarden(this, 0, 0, 0, this.flowers);
-this.rock = new MyRock(this, 0.5,0.5,0.5);
+    this.rock = new MyRock(this, 0.5,0.5,0.5);
     this.flower = new MyFlower(this,0,0,0);
     this.rockSet = new MyRockSet(this);
+    this.setUpdatePeriod(1000/60);
+
     //Objects connected to MyInterface
     this.displayAxis = true;
     this.scaleFactor = 1;
@@ -75,6 +73,10 @@ this.rock = new MyRock(this, 0.5,0.5,0.5);
     this.displayGarden = false;
     this.displayRock = false;
     this.displayRockSet = false;
+    this.displayBee = false;
+    this.scaleFactor = 1;
+    this.speedFactor = 1;
+
     this.enableTextures(true);
     this.texture = new CGFtexture(this, "images/terrain.jpg");
     this.appearance = new CGFappearance(this);
@@ -86,7 +88,7 @@ this.rock = new MyRock(this, 0.5,0.5,0.5);
     this.appearanceEarth.setTexture(this.textureEarth);
     this.appearanceEarth.setTextureWrap("REPEAT", "REPEAT");
 
-    this.textureRock = new CGFtexture(this, "images/texturerock.jpg");
+    this.textureRock = new CGFtexture(this, "images/texturerock.png");
     this.appearanceRock = new CGFappearance(this);
     this.appearanceRock.setTexture(this.textureRock);
     this.appearanceRock.setTextureWrap("REPEAT", "REPEAT");
@@ -119,6 +121,41 @@ this.rock = new MyRock(this, 0.5,0.5,0.5);
   updateGardenSize(cols, rows){
     this.garden = new MyGarden(this, 0, 0, 0, cols, rows);
   }
+
+  update(t){
+    this.checkKeys();
+    this.bee.update(t, this.speedFactor, this.scaleFactor);
+  }
+
+  checkKeys() {
+
+    var text="Keys pressed: ";
+    var keysPressed=false;
+
+    if (this.gui.isKeyPressed("KeyW")) {
+        text+=" W ";
+        keysPressed=true;
+    }
+
+    if (this.gui.isKeyPressed("KeyS")){
+      text+=" S ";
+      keysPressed=true;
+    }
+
+    if (this.gui.isKeyPressed("KeyA")){
+      text+=" A ";
+      keysPressed=true;
+    }
+
+    if (this.gui.isKeyPressed("KeyD")){
+      text+=" D ";
+      keysPressed=true;
+    }
+
+    if (keysPressed)
+      console.log(text);
+}
+
   display() {
     // ---- BEGIN Background, camera and axis setup
     // Clear image and depth buffer everytime we update the scene
@@ -149,6 +186,9 @@ this.rock = new MyRock(this, 0.5,0.5,0.5);
     this.popMatrix();
     this.pushMatrix();
     if (this.displayGarden) this.garden.display();
+    this.popMatrix();
+    this.pushMatrix();
+    if(this.displayBee) this.bee.display();
     this.popMatrix();
     // ---- END Primitive drawing section
   }
