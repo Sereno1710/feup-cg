@@ -16,15 +16,21 @@ export class MyPointyTriangle extends CGFobject {
     
     initBuffers() {
         this.vertices = [
-            -0.2 * this.size + this.x, 0, 0 + this.y,	//0
+            -0.3 + this.x, 0, 0 + this.y,	//0
             0 + this.x, 1 * this.size, 0 + this.y,	//1
-            0.2 * this.size + this.x, 0, 0 + this.y,	//2
+            0.3 + this.x, 0, 0 + this.y,	//2
         ];
 
         this.indices = [
             0, 1, 2,
             2, 1, 0
         ];
+
+        this.normals = [
+            0, 0, 1,
+            0, 0, 1,
+            0, 0, 1
+        ]
         this.texCoords = [
             0, 0.5,
             0, 1,

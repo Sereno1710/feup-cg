@@ -19,6 +19,7 @@ import { MyBee } from "./MyBee.js";
 import { MyRockSet } from "./MyRockSet.js";
 import { MyPollen } from "./MyPollen.js";
 import { MyHive } from "./MyHive.js";
+import { MyGrass } from "./MyGrass.js";
 /**
  * MyScene
  * @constructor
@@ -57,7 +58,12 @@ export class MyScene extends CGFscene {
     this.garden = new MyGarden(this, 0, 0, 0, this.rows, this.cols);
     this.bee = new MyBee(this, 0, 3 ,0);
     this.rock = new MyRock(this, 0.5, 0.5, 0.5);
+<<<<<<< HEAD
     this.rockSet = new MyRockSet(this, new MyHive(this));
+=======
+    this.rockSet = new MyRockSet(this);
+    this.grass = new MyGrass(this, 2500);
+>>>>>>> origin/master
     this.setUpdatePeriod(1000/60);
 
     //Objects connected to MyInterface
@@ -68,7 +74,12 @@ export class MyScene extends CGFscene {
     this.displayRock = false;
     this.displayRockSet = false;
     this.displayBee = false;
+<<<<<<< HEAD
     this.BeeScaleFactor = 1;
+=======
+    this.displayGrass = false;
+    this.BeeScaleFactor = 0.5;
+>>>>>>> origin/master
     this.speedFactor = 1;
 
     this.enableTextures(true);
@@ -92,6 +103,10 @@ export class MyScene extends CGFscene {
     this.lights[0].setDiffuse(1.0, 1.0, 1.0, 1.0);
     this.lights[0].enable();
     this.lights[0].update();
+    this.lights[1].setPosition(4, 0, 14, 1);
+    this.lights[1].setDiffuse(1.0, 1.0, 1.0, 1.0);
+    this.lights[1].enable();
+    this.lights[1].update();
   }
   initCameras() {
     this.camera = new CGFcamera(
@@ -187,6 +202,9 @@ export class MyScene extends CGFscene {
 
     this.pushMatrix();
     if(this.displayBee) this.bee.display();
+    this.popMatrix();
+    this.pushMatrix();
+    if(this.displayGrass) this.grass.display();
     this.popMatrix();
     // ---- END Primitive drawing section
   }

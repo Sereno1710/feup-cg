@@ -34,6 +34,7 @@ export class MyInterface extends CGFinterface {
         bee.add(this.scene, 'displayBee').name('Display Bee');
         bee.add(this.scene, 'BeeScaleFactor', 0.5, 3).name('Bee Scale Factor');
         bee.add(this.scene, 'speedFactor', 0.1, 3).name('Bee Speed Factor');
+        this.gui.add(this.scene, 'displayGrass').name('Display Grass');
         this.initKeys();
         return true;
     }
