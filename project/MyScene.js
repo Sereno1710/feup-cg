@@ -12,7 +12,6 @@ import { MyPanorama } from "./MyPanorama.js";
 import { MyFlower } from "./MyFlower.js";
 import { MyGarden } from "./MyGarden.js";
 import { MyRock } from "./MyRock.js";
-import { MyPetal } from "./MyPetal.js";
 import { MyLeaf } from "./MyLeaf.js";
 import { MyStem } from "./MyStem.js";
 import { MyReceptacle } from "./MyReceptacle.js";
@@ -42,6 +41,8 @@ export class MyScene extends CGFscene {
     this.gl.enable(this.gl.CULL_FACE);
     this.gl.depthFunc(this.gl.LEQUAL);
 
+    this.rows = 5;
+    this.cols = 5;
     //Textures
     this.texturePanorama = new CGFtexture(this, "images/panorama4.jpg");
 
@@ -56,7 +57,7 @@ export class MyScene extends CGFscene {
     this.stem = new MyStem(this, 0.5, 3, Math.PI / 24);
     this.leaf = new MyLeaf(this, 0.1);
     this.receptacle = new MyReceptacle(this, 3.5, 8);
-    this.garden = new MyGarden(this, 0, 0, 0, 4, 4);
+    this.garden = new MyGarden(this, 0, 0, 0, this.rows, this.cols);
     this.petals = new MyPetals(
       this,
       7,
@@ -93,7 +94,7 @@ export class MyScene extends CGFscene {
     this.appearanceEarth.setTexture(this.textureEarth);
     this.appearanceEarth.setTextureWrap("REPEAT", "REPEAT");
 
-    this.textureRock = new CGFtexture(this, "images/texturerock.png");
+    this.textureRock = new CGFtexture(this, "images/texturerock.jpg");
     this.appearanceRock = new CGFappearance(this);
     this.appearanceRock.setTexture(this.textureRock);
     this.appearanceRock.setTextureWrap("REPEAT", "REPEAT");
@@ -122,8 +123,8 @@ export class MyScene extends CGFscene {
   setRockAppearance() {
     this.appearanceRock.apply();
   }
-  updateGardenSize(cols, rows) {
-    this.garden = new MyGarden(this, 0, 0, 0, cols, rows);
+  updateGarden() {
+    this.garden.updateGarden(this.rows, this.cols);
   }
 
   update(t){

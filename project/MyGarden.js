@@ -29,4 +29,17 @@ export class MyGarden extends CGFobject{
             }
           }
     }
+
+    updateGarden(rows, cols) {
+        this.rows = rows;
+        this.cols = cols;
+        if(this.rows*this.cols < this.flowers.length){
+            this.flowers = this.flowers.slice(0, this.rows*this.cols);
+        } else if(this.rows*this.cols > this.flowers.length){
+            for (let i = this.flowers.length; i < this.rows*this.cols; i++) {
+                this.flowers.push(new MyFlower(this.scene));
+            }
+        }
+        this.display();
+    }
 }
