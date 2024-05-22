@@ -17,6 +17,8 @@ import { MyReceptacle } from "./MyReceptacle.js";
 import { MyPetals } from "./MyPetals.js";
 import { MyBee } from "./MyBee.js";
 import { MyRockSet } from "./MyRockSet.js";
+import { MyPollen } from "./MyPollen.js";
+import { MyHive } from "./MyHive.js";
 /**
  * MyScene
  * @constructor
@@ -51,24 +53,11 @@ export class MyScene extends CGFscene {
     this.sphere = new MySphere(this, 32, 8);
     this.rock = new MyRock(this, 16, 8);
     this.panorama = new MyPanorama(this, this.texturePanorama);
-    this.flower = new MyFlower(this, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-    this.petals = new MyPetals(this, 2, Math.PI / 12);
-    this.stem = new MyStem(this, 0.5, 3, Math.PI / 24);
-    this.leaf = new MyLeaf(this, 0.1);
-    this.receptacle = new MyReceptacle(this, 3.5, 8);
+    this.flower = new MyFlower(this, new MyPollen(this));
     this.garden = new MyGarden(this, 0, 0, 0, this.rows, this.cols);
-    this.petals = new MyPetals(
-      this,
-      7,
-      8,
-      5,
-      Math.PI / 24,
-      Math.PI / 12,
-      Math.PI / 3
-    );
     this.bee = new MyBee(this, 0, 3 ,0);
     this.rock = new MyRock(this, 0.5, 0.5, 0.5);
-    this.rockSet = new MyRockSet(this);
+    this.rockSet = new MyRockSet(this, new MyHive(this));
     this.setUpdatePeriod(1000/60);
 
     //Objects connected to MyInterface
@@ -79,7 +68,7 @@ export class MyScene extends CGFscene {
     this.displayRock = false;
     this.displayRockSet = false;
     this.displayBee = false;
-    this.BeeScaleFactor = 0.5;
+    this.BeeScaleFactor = 1;
     this.speedFactor = 1;
 
     this.enableTextures(true);
@@ -176,21 +165,26 @@ export class MyScene extends CGFscene {
     this.pushMatrix();
     this.panorama.display();
     this.popMatrix();
+
     this.pushMatrix();
     if (this.displayRock) {
       this.setRockAppearance();
       this.rock.display();
     }
     this.popMatrix();
+
     this.pushMatrix();
     if (this.displayRockSet) this.rockSet.display();
     this.popMatrix();
+
     this.pushMatrix();
     if (this.displayFlower) this.flower.display();
     this.popMatrix();
+
     this.pushMatrix();
     if (this.displayGarden) this.garden.display();
     this.popMatrix();
+
     this.pushMatrix();
     if(this.displayBee) this.bee.display();
     this.popMatrix();

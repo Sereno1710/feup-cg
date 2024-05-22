@@ -5,10 +5,13 @@ import { MyRock } from "./MyRock.js";
  * MyRockSet
  * @constructor
  * @param scene - Reference to MyScene object
+ * @param hive - Hive to sit on top of the rocks
  */
 export class MyRockSet extends CGFobject {
-  constructor(scene) {
+  constructor(scene, hive) {
     super(scene);
+
+    this.hive = hive;
 
     this.rocklist = [];
     this.differentRocks = 10;
@@ -47,6 +50,11 @@ export class MyRockSet extends CGFobject {
       height += 0.5;
     }
 
+    this.scene.popMatrix();
+
+    this.scene.pushMatrix();
+    this.scene.translate(0, height, 0);
+    this.hive.display();
     this.scene.popMatrix();
 
     this.scene.popMatrix();

@@ -6,25 +6,30 @@ import { MyReceptacle } from "./MyReceptacle.js";
  * MyStem
  * @constructor
  * @param scene - Reference to MyScene object
+ * @param pollen - Pollen of the flower
  */
 export class MyFlower extends CGFobject {
-  constructor(scene) {
+  constructor(scene, pollen) {
     super(scene);
 
+    this.pollen = pollen;
     this.exteriorRadius = Math.random() * (3.5 - 1.5) + 1.5;
     this.petalSize = Math.random() * (2 - 1) + 1;
     this.petalNumber = Math.floor(Math.random() * (16 - 8) + 8);
     this.petalAngle =
       Math.random() * (Math.PI / 6 - Math.PI / 12) + Math.PI / 12;
-    this.heartRadius = this.exteriorRadius > this.petalSize + 1 ? (this.exteriorRadius - this.petalSize) + 0.5 : 1.5;
+    this.heartRadius =
+      this.exteriorRadius > this.petalSize + 1
+        ? this.exteriorRadius - this.petalSize + 0.5
+        : 1.5;
     this.stemRadius = Math.random() * (0.8 - 0.3) + 0.3;
-    this.stemSize =  Math.floor(Math.random() * (6 - 4) + 4);
+    this.stemSize = Math.floor(Math.random() * (6 - 4) + 4);
     this.stemAngle =
       Math.random() * (Math.PI / 24 - Math.PI / 48) + Math.PI / 48;
     this.coordinates = {
-      x: Math.random()*5 + 5,
+      x: Math.random() * 5 + 5,
       y: 0,
-      z: Math.random()*5 + 5,
+      z: Math.random() * 5 + 5,
     };
 
     this.initMaterials();
@@ -36,8 +41,12 @@ export class MyFlower extends CGFobject {
       this.petalMaterial5,
     ];
     this.petalMaterial = this.petalMaterials[Math.floor(Math.random() * 5)];
-    this.receptacleMaterials = [this.receptacleMaterial1, this.receptacleMaterial2];
-    this.receptacleMaterial = this.receptacleMaterials[Math.floor(Math.random()*2)];
+    this.receptacleMaterials = [
+      this.receptacleMaterial1,
+      this.receptacleMaterial2,
+    ];
+    this.receptacleMaterial =
+      this.receptacleMaterials[Math.floor(Math.random() * 2)];
 
     this.stem = new MyStem(
       scene,
@@ -106,7 +115,7 @@ export class MyFlower extends CGFobject {
       new CGFtexture(this.scene, "images/petaltexture5.png")
     );
     this.petalMaterial5.setTextureWrap("REPEAT", "REPEAT");
-    
+
     this.receptacleMaterial1 = new CGFappearance(this.scene);
     this.receptacleMaterial1.setAmbient(0.8, 0.8, 0.8, 0.0);
     this.receptacleMaterial1.setDiffuse(0.95, 0.95, 0.95, 0.0);
@@ -120,7 +129,7 @@ export class MyFlower extends CGFobject {
     );
 
     this.receptacleMaterial2 = new CGFappearance(this.scene);
-    this.receptacleMaterial2.setAmbient(0.8, 0.8, 0.8, 0.0);  
+    this.receptacleMaterial2.setAmbient(0.8, 0.8, 0.8, 0.0);
     this.receptacleMaterial2.setDiffuse(0.95, 0.95, 0.95, 0.0);
     this.receptacleMaterial2.setSpecular(0.5, 0.5, 0.5, 0.0);
     this.receptacleMaterial2.setTexture(
@@ -144,12 +153,14 @@ export class MyFlower extends CGFobject {
     this.scene.popMatrix();
 
     this.scene.pushMatrix();
-    this.scene.translate(0, this.stemSize*this.stemRadius*4, 0);
-    this.scene.rotate(-this.stemAngle*2, 1, 0, 0);
+    this.scene.translate(0, this.stemSize * this.stemRadius * 4, 0);
+    this.scene.rotate(-this.stemAngle * 2, 1, 0, 0);
     this.receptacleMaterial.apply();
     this.receptacle.display();
     this.petalMaterial.apply();
     this.petals.display();
+    this.scene.translate(0, 0, 1);
+    this.pollen.display();
     this.scene.popMatrix();
 
     this.scene.popMatrix();

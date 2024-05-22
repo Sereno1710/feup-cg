@@ -32,6 +32,7 @@ export class MyBee extends CGFobject {
     this.scene.pushMatrix();
     this.scene.translate(this.position.x, this.position.y, this.position.z);
     this.scene.scale(this.scaleFactor, this.scaleFactor, this.scaleFactor);
+    this.scene.scale(0.5, 0.5, 0.5);
     this.scene.rotate(this.orientation, 0, 1, 0);
     this.scene.pushMatrix();
     this.torso.display();
