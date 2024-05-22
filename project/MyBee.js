@@ -130,9 +130,9 @@ export class MyBee extends CGFobject {
 
   accelerate(v) {
     if( v < 0)
-      this.speed= Math.max(this.speed + v/3, 0);
+      this.speed= Math.max(this.speed + v/5, 0);
     else
-      this.speed = Math.min(this.speed + v/3, this.maxSpeed);
+      this.speed = Math.min(this.speed + v/5, this.maxSpeed);
   }
 
   handleKeys(v) {
@@ -164,13 +164,13 @@ export class MyBee extends CGFobject {
     this.time = t;
     this.handleKeys(speedFactor); 
     var verticalMovement = Math.sin(t / 500) * 1;
-
-    if(this.speed < 0.1){
-        this.angle = Math.PI / 6 * Math.sin(1 / 0.5 * t);
-    }else if(this.speed < 2 && this.speed > 0.1){
-        this.angle = Math.PI / 6 * Math.sin(this.speed*7 * t);
-    }else{
-        this.angle = Math.PI / 6 * Math.sin(10 * t);
+    if (this.speed <= 0.1) {
+      this.angle = Math.PI / 6 * Math.sin(t/300);
+    }
+    else if(this.speed < 0.1){
+        this.angle = Math.PI / 6 * Math.sin(t/150);
+    }else if(this.speed <= 2 && this.speed > 0.1){
+        this.angle = Math.PI / 6 * Math.sin(t);
     }
 
     this.position.x = this.position.x + this.speed * Math.cos(this.orientation);
