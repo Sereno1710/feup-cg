@@ -9,12 +9,14 @@ import { MyRock } from "./MyRock.js";
 export class MyRockSet extends CGFobject {
   constructor(scene) {
     super(scene);
+
     this.rocklist = [];
-    this.anglelist = [];
     this.differentRocks = 10;
     for (let i = 0; i < this.differentRocks; i++) {
       this.rocklist.push(new MyRock(this.scene));
     }
+
+    this.anglelist = [];
     this.differentAngles = 7;
     for (let i = 0; i < this.differentAngles; i++) {
       this.anglelist.push(Math.random() * 2 * Math.PI);
