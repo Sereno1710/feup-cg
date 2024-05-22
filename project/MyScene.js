@@ -66,7 +66,7 @@ export class MyScene extends CGFscene {
       Math.PI / 12,
       Math.PI / 3
     );
-    this.bee = new MyBee(this);
+    this.bee = new MyBee(this, 0, 3 ,0);
     this.rock = new MyRock(this, 0.5, 0.5, 0.5);
     this.rockSet = new MyRockSet(this);
     this.setUpdatePeriod(1000/60);
