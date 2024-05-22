@@ -25,7 +25,7 @@ export class MyRockSet extends CGFobject {
   display() {
     this.scene.pushMatrix();
 
-    this.scene.scale(2, 2, 2);
+    this.scene.scale(3, 3, 3);
     this.scene.pushMatrix();
     var height = 0;
 
