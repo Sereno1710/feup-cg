@@ -12,12 +12,7 @@ export class MyGarden extends CGFobject{
         this.cols = cols;
         for (let i = 0; i < this.rows; i++) {
           for (let j = 0; j < this.cols; j++) {
-              let position = {
-                  x: 0 + j * 10 - this.cols * 2 + Math.random() * 2, 
-                  y: 0, 
-                  z: 0 + i * 10 - this.rows * 2 + Math.random() * 2
-              };
-              flowers.push(new MyFlower(this.scene, position.x, position.y, position.z));
+              flowers.push(new MyFlower(this.scene));
           }
         }
         this.flowers = flowers;
@@ -25,11 +20,13 @@ export class MyGarden extends CGFobject{
 
     display() {
         // Display all the flowers
-        for (let i = 0; i < this.flowers.length; i++) {
-            this.scene.pushMatrix();
-            this.scene.translate(this.flowers[i].coordinates.x , this.flowers[i].coordinates.y, this.flowers[i].coordinates.z);
-            this.flowers[i].display();
-            this.scene.popMatrix();
-        }
+        for (let i = 0; i < this.rows; i++) {
+            for (let j = 0; j < this.cols; j++) {
+                this.scene.pushMatrix();
+                this.scene.translate((this.coordinates.x + i)*10, this.coordinates.y, (this.coordinates.z + j)*10);
+                this.flowers[i * this.cols + j].display();
+                this.scene.popMatrix();
+            }
+          }
     }
 }

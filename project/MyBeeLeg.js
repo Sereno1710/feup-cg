@@ -10,7 +10,9 @@ import { MyCylinder } from "./MyCylinder.js";
 export class MyBeeLeg extends CGFobject {
   constructor(scene) {
     super(scene);
+
     this.initMaterials();
+    
     this.segment = new MyCylinder(scene, 16, 8);
   }
 

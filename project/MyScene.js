@@ -12,17 +12,13 @@ import { MyPanorama } from "./MyPanorama.js";
 import { MyFlower } from "./MyFlower.js";
 import { MyGarden } from "./MyGarden.js";
 import { MyRock } from "./MyRock.js";
-<<<<<<< HEAD
 import { MyPetal } from "./MyPetal.js";
 import { MyLeaf } from "./MyLeaf.js";
 import { MyStem } from "./MyStem.js";
 import { MyReceptacle } from "./MyReceptacle.js";
 import { MyPetals } from "./MyPetals.js";
 import { MyBee } from "./MyBee.js";
-
-=======
 import { MyRockSet } from "./MyRockSet.js";
->>>>>>> origin/master
 /**
  * MyScene
  * @constructor
@@ -56,17 +52,22 @@ export class MyScene extends CGFscene {
     this.rock = new MyRock(this, 16, 8);
     this.panorama = new MyPanorama(this, this.texturePanorama);
     this.flower = new MyFlower(this, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-    this.petal = new MyPetal(this, Math.PI / 12, Math.PI / 3);
-    this.stem = new MyStem(this, 0.1, 1, 0, 0);
-    this.leaf = new MyLeaf(this, 0.1, 0.5, 0, 0);
-    this.receptacle = new MyReceptacle(this, 0.5, 1, 0.1, Math.PI / 4, 0);
-    this.petals = new MyPetals(this, 0.5, Math.PI / 4, 0);
-
+    this.petals = new MyPetals(this, 2, Math.PI / 12);
+    this.stem = new MyStem(this, 0.5, 3, Math.PI / 24);
+    this.leaf = new MyLeaf(this, 0.1);
+    this.receptacle = new MyReceptacle(this, 3.5, 8);
+    this.garden = new MyGarden(this, 0, 0, 0, 4, 4);
+    this.petals = new MyPetals(
+      this,
+      7,
+      8,
+      5,
+      Math.PI / 24,
+      Math.PI / 12,
+      Math.PI / 3
+    );
     this.bee = new MyBee(this);
-
-    this.garden = new MyGarden(this, 0, 0, 0, this.flowers);
-this.rock = new MyRock(this, 0.5,0.5,0.5);
-    this.flower = new MyFlower(this,0,0,0);
+    this.rock = new MyRock(this, 0.5, 0.5, 0.5);
     this.rockSet = new MyRockSet(this);
     //Objects connected to MyInterface
     this.displayAxis = true;
@@ -90,7 +91,6 @@ this.rock = new MyRock(this, 0.5,0.5,0.5);
     this.appearanceRock = new CGFappearance(this);
     this.appearanceRock.setTexture(this.textureRock);
     this.appearanceRock.setTextureWrap("REPEAT", "REPEAT");
-
   }
   initLights() {
     this.lights[0].setPosition(15, 0, 5, 1);
@@ -113,10 +113,10 @@ this.rock = new MyRock(this, 0.5,0.5,0.5);
     this.setSpecular(0.2, 0.4, 0.8, 1.0);
     this.setShininess(10.0);
   }
-  setRockAppearance(){
+  setRockAppearance() {
     this.appearanceRock.apply();
   }
-  updateGardenSize(cols, rows){
+  updateGardenSize(cols, rows) {
     this.garden = new MyGarden(this, 0, 0, 0, cols, rows);
   }
   display() {
@@ -136,16 +136,16 @@ this.rock = new MyRock(this, 0.5,0.5,0.5);
     this.panorama.display();
     this.popMatrix();
     this.pushMatrix();
-    if(this.displayRock){
+    if (this.displayRock) {
       this.setRockAppearance();
       this.rock.display();
     }
-    this.popMatrix()
-    this.pushMatrix();
-    if(this.displayRockSet) this.rockSet.display();
     this.popMatrix();
     this.pushMatrix();
-    if(this.displayFlower) this.flower.display();
+    if (this.displayRockSet) this.rockSet.display();
+    this.popMatrix();
+    this.pushMatrix();
+    if (this.displayFlower) this.flower.display();
     this.popMatrix();
     this.pushMatrix();
     if (this.displayGarden) this.garden.display();

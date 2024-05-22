@@ -10,7 +10,9 @@ import { MyCircle } from "./MyCircle.js";
 export class MyBeeWing extends CGFobject {
   constructor(scene) {
     super(scene);
+
     this.initMaterials();
+    
     this.wing = new MyCircle(scene, 32);
   }
 

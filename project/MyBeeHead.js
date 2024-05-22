@@ -12,7 +12,9 @@ import { MySphere } from "./MySphere.js";
 export class MyBeeHead extends CGFobject {
   constructor(scene) {
     super(scene);
+
     this.initMaterials();
+    
     this.sphere = new MySphere(scene, 16, 8);
     this.antenna = new MyBeeAntenna(scene);
   }

@@ -10,22 +10,24 @@ import { MyReceptacle } from "./MyReceptacle.js";
  * @param stacks - Number of stacks
  */
 export class MyFlower extends CGFobject {
-  constructor(
-    scene,
-    exteriorRadius,
-    petalNumber,
-    petalColour,
-    heartRadius,
-    heartColour,
-    stemRadius,
-    stemSize,
-    stemColour,
-    leafColour,
-    x,
-    y,
-    z
-  ) {
+  constructor(scene) {
     super(scene);
+
+    this.exteriorRadius = Math.random() * (7 - 3) + 3;
+    this.petalSize = Math.random() * (3 - 2) + 1;
+    this.petalNumber = Math.floor(Math.random() * (16 - 8) + 8);
+    this.petalAngle =
+      Math.random() * (Math.PI / 3 - Math.PI / 6) + Math.PI / 6;
+    this.heartRadius =  this.exteriorRadius - this.petalSize;
+    this.stemRadius = Math.random() * (0.8 - 0.3) + 0.3;
+    this.stemSize =  Math.floor(Math.random() * (6 - 4) + 4);
+    this.stemAngle =
+      Math.random() * (Math.PI / 24 - Math.PI / 48) + Math.PI / 48;
+    this.coordinates = {
+      x: Math.random(),
+      y: 0,
+      z: Math.random(),
+    };
 
     this.initMaterials();
     this.petalMaterials = [
@@ -34,34 +36,26 @@ export class MyFlower extends CGFobject {
       this.petalMaterial3,
     ];
     this.petalMaterial = this.petalMaterials[Math.floor(Math.random() * 3)];
-    this.randomize();
-    this.coordinates = { x: x, y: y, z: z };
+
     this.stem = new MyStem(
       scene,
-      this.stem_radius,
-      this.stem_size,
-      this.incline,
-      this.petal_number
+      this.stemRadius,
+      this.stemSize,
+      this.stemAngle
     );
     this.receptacle = new MyReceptacle(
       scene,
-      this.receptacle_radius,
-      this.stem_size,
-      this.stem_radius,
-      Math.PI / 4,
-      this.petal_number
+      this.heartRadius,
+      this.petalNumber
     );
-    if (this.flower_radius <= this.receptacle_radius)
-      this.flower_radius = this.receptacle_radius + 1;
-    var petal_size = this.flower_radius - this.receptacle_radius;
     this.petals = new MyPetals(
       scene,
-      petal_size,
-      Math.PI / 4,
-      this.stem_size,
-      this.petal_number,
-      this.receptacle_radius,
-      this.petal_random
+      this.exteriorRadius,
+      this.petalNumber,
+      this.petalSize,
+      Math.PI / 12,
+      Math.PI / 8,
+      this.petalAngle
     );
   }
   initMaterials() {
@@ -105,26 +99,6 @@ export class MyFlower extends CGFobject {
       "MIRRORED_REPEAT"
     );
   }
-
-  randomize() {
-    this.petal_number = Math.floor(Math.random() * 10) + 10;
-    this.stem_radius = Math.floor(Math.random() * 2) + 2;
-    this.stem_size = Math.floor(Math.random() * 7) + 3;
-    this.receptacle_radius = Math.floor(Math.random() * 2) + 3;
-    this.flower_radius = Math.floor(Math.random() * 3) + 4;
-    this.receptacle_color = Math.floor(Math.random() * 6);
-    this.petal_random = Math.random() * 0.3 + 0.01;
-    var stem_angles = [];
-    for (var i = 0; i < this.stem_size - 1; i++) {
-      stem_angles.push(
-        Math.random() *
-          0.2 *
-          (Math.random() > 0.5 ? 1 : -1) *
-          (Math.random() > 0.2 ? 1 : 0)
-      );
-    }
-    this.incline = stem_angles;
-  }
   display() {
     this.scene.pushMatrix();
     this.scene.translate(
@@ -132,17 +106,20 @@ export class MyFlower extends CGFobject {
       this.coordinates.y,
       this.coordinates.z
     );
+
     this.scene.pushMatrix();
     this.stem.display();
     this.scene.popMatrix();
+
     this.scene.pushMatrix();
+    this.scene.translate(0, this.stemSize*this.stemRadius*4, 0);
+    this.scene.rotate(-this.stemAngle*2, 1, 0, 0);
     this.receptacleMaterial.apply();
     this.receptacle.display();
-    this.scene.popMatrix();
-    this.scene.pushMatrix();
     this.petalMaterial.apply();
     this.petals.display();
     this.scene.popMatrix();
+
     this.scene.popMatrix();
   }
 }
