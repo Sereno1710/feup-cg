@@ -27,7 +27,7 @@ export class MyInterface extends CGFinterface {
         this.gui.add(this.scene, 'displayRock').name('Display Rock');
         this.gui.add(this.scene, 'displayRockSet').name('Display Rock Set');
         this.gui.add(this.scene, 'displayBee').name('Display Bee');
-        this.gui.add(this.scene, 'scaleFactor', 0.5, 3).name('Bee Scale Factor');
+        this.gui.add(this.scene, 'BeeScaleFactor', 0.5, 3).name('Bee Scale Factor');
         this.gui.add(this.scene, 'speedFactor', 0.1, 3).name('Bee Speed Factor');
         this.initKeys();
         return true;

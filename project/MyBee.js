@@ -24,7 +24,7 @@ export class MyBee extends CGFobject {
     this.position = {x: x, y: y, z: z};
     this.defaultPosition = {x: x, y: y, z: z};
     this.time = 0;
-    this.maxSpeed = 1.5;
+    this.maxSpeed = 2;
   }
 
   display() {
@@ -164,10 +164,13 @@ export class MyBee extends CGFobject {
     this.handleKeys(speedFactor); 
     var verticalMovement = Math.sin(t / 500) * 1;
 
-    if(this.speed == 0)
-      this.angle = Math.PI / 4 * Math.sin(t/300);
-    else
-      this.angle = Math.PI / 4 * Math.sin(t * 10);
+    if(this.speed < 0.1){
+        this.angle = Math.PI / 6 * Math.sin(1 / 0.5 * t);
+    }else if(this.speed < 2 && this.speed > 0.1){
+        this.angle = Math.PI / 6 * Math.sin(this.speed*7 * t);
+    }else{
+        this.angle = Math.PI / 6 * Math.sin(10 * t);
+    }
 
     this.position.x = this.position.x + this.speed * Math.cos(this.orientation);
     this.position.z = this.position.z + this.speed * Math.sin(-this.orientation);

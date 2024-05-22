@@ -74,7 +74,7 @@ export class MyScene extends CGFscene {
     this.displayRock = false;
     this.displayRockSet = false;
     this.displayBee = false;
-    this.scaleFactor = 1;
+    this.BeeScaleFactor = 0.5;
     this.speedFactor = 1;
 
     this.enableTextures(true);
@@ -124,7 +124,7 @@ export class MyScene extends CGFscene {
 
   update(t){
     this.checkKeys();
-    this.bee.update(t, this.speedFactor, this.scaleFactor);
+    this.bee.update(t, this.speedFactor, this.BeeScaleFactor);
   }
 
   checkKeys() {
