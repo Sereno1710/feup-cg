@@ -24,7 +24,7 @@ export class MyPetals extends CGFobject {
   
   display() {
     this.scene.pushMatrix();
-    this.scene.translate(0, 0, 0.9);
+    this.scene.translate(0, 0, 0.8);
     var delta_alpha = Math.PI*2/this.petalNumber;
 
     for (let i = 0; i < this.petalNumber; i++) {
