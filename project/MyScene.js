@@ -118,8 +118,8 @@ export class MyScene extends CGFscene {
       Math.PI / 3, // FOV
       0.1,
       1000,
-      vec3.fromValues(50, 10, 15),
-      vec3.fromValues(0, 0, 0)
+      vec3.fromValues(25, -80, 25),
+      vec3.fromValues(0, -90, 0)
     );
   }
   setDefaultAppearance() {
@@ -195,27 +195,43 @@ export class MyScene extends CGFscene {
     this.popMatrix();
 
     this.pushMatrix();
+    this.appearance.apply();
+    this.translate(0,-100,0);
+    this.scale(400,400,400);
+    this.rotate(-Math.PI/2.0,1,0,0);
+    this.plane.display();
+    this.popMatrix();
+
+
+    this.pushMatrix();
     if (this.displayRock) {
+      this.translate(0, -100, 0);
       this.setRockAppearance();
       this.rock.display();
     }
     this.popMatrix();
 
     this.pushMatrix();
+
+    this.translate(-30, -100, 10);
     if (this.displayRockSet) this.rockSet.display();
     this.popMatrix();
 
     this.pushMatrix();
+    this.translate(0, -100, 0);
     if (this.displayFlower) this.flower.display();
     this.popMatrix();
 
     this.pushMatrix();
+    this.translate(-20, -100, -50);
     if (this.displayGarden) this.garden.display();
     this.popMatrix();
 
     this.pushMatrix();
+    this.translate(0, -90, 0);
     if(this.displayBee) this.bee.display();
     this.popMatrix();
+
     this.pushMatrix();
 
     this.setGrassAppearance();
