@@ -4,8 +4,8 @@ import { MyTriangle } from "./MyTriangle.js";
  * MyStem
  * @constructor
  * @param scene - Reference to MyScene object
- * @param slices - Number of slices
- * @param stacks - Number of stacks
+ * @param size - Size of the petal
+ * @param angle - Angle of the petal
  */
 export class MyPetal extends CGFobject {
   constructor(scene, size, angle) {

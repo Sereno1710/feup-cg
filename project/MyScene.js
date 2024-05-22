@@ -3,7 +3,6 @@ import {
   CGFcamera,
   CGFaxis,
   CGFappearance,
-  CGFshader,
   CGFtexture,
 } from "../lib/CGF.js";
 import { MyPlane } from "./MyPlane.js";

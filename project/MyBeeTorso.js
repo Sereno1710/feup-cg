@@ -5,17 +5,15 @@ import { MyCone } from "./MyCone.js";
  * MyBeeTorso
  * @constructor
  * @param scene - Reference to MyScene object
- * @param slices - Number of slices
- * @param stacks - Number of stacks
  */
 export class MyBeeTorso extends CGFobject {
   constructor(scene) {
     super(scene);
 
     this.initMaterials();
-    
+
     this.sphere = new MySphere(scene, 16, 8);
-    this.sting = new MyCone(scene, 16, 8);
+    this.sting = new MyCone(scene, 16);
   }
 
   initMaterials() {

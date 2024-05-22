@@ -2,6 +2,16 @@ import {CGFobject, CGFappearance, CGFtexture} from '../../lib/CGF.js';
 import {MyPlane} from "./MyPlane.js";
 import {MyFlower} from "./MyFlower.js";
 
+/**
+ * MyGarden
+ * @constructor
+ * @param scene - Reference to MyScene object
+ * @param x - x coordinate of the top left corner
+ * @param y - y coordinate of the top left corner
+ * @param z - z coordinate of the top left corner
+ * @param cols - number of columns in flower matrix
+ * @param rows - number of rows in flower matrix
+ */
 export class MyGarden extends CGFobject{
     constructor(scene, x, y, z, cols , rows) {
         super(scene);

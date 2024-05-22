@@ -5,15 +5,13 @@ import { MySphere } from "./MySphere.js";
  * MyBeeAntenna
  * @constructor
  * @param scene - Reference to MyScene object
- * @param slices - Number of slices
- * @param stacks - Number of stacks
  */
 export class MyBeeAntenna extends CGFobject {
   constructor(scene) {
     super(scene);
 
     this.initMaterials();
-    
+
     this.segment = new MyCylinder(scene, 16, 8);
     this.sphere = new MySphere(scene, 16, 8);
   }
